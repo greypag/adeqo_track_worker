@@ -1,0 +1,25 @@
+<ul class="tab_menu">
+	<li><a class="tab_tag ad_account_tag" href="/account">Ad Accounts</a></li>
+	<li><a class="tab_tag user_tag" href="/account/user">Users</a></li>
+	<li><a class="tab_tag portfolio_tag" href="/account/portfolio">Portfolio</a></li>
+	<li><a class="tab_tag tracking_tag" href="/account/tracking">Tracking</a></li>
+	<li><a class="tab_tag password_tag" href="/account/password">Password</a></li>
+</ul>
+
+
+<script>
+	if(/\/account\/user/i.test(window.location.href)){
+		$(".user_tag").addClass("active");
+	}
+	else if(/\/account\/portfolio/i.test(window.location.href)){
+		$(".portfolio_tag").addClass("active");
+	}
+	else if(/\/account\/tracking/i.test(window.location.href)){
+		$(".tracking_tag").addClass("active");
+	}
+	else if(/\/account\/password/i.test(window.location.href)){
+		$(".password_tag").addClass("active");
+	}else if (/account/i.test(window.location.href)){
+		$(".ad_account_tag").addClass("active");
+	}
+</script>

@@ -1,0 +1,134 @@
+<h1>Listing networks</h1>
+
+<%
+
+if @current_user_network.count.to_i == 0
+	concat "You dont have any Ad Network under this company."
+end
+%>
+
+<hr>
+
+<form id="addnewwork">
+	Network Type: 
+	<select name="network_type" id="network_type">
+	  <option value="sogou">Sogou</option>
+	  <option value="360">360</option>
+	</select>
+	<br>
+	Network Name <input type="text" name="network_name" id="network_name">
+	<br>
+	Currency 
+	<select name="currency" id="currency">
+	  <option value="us">US</option>
+	  <option value="rmb">RMB</option>
+	</select>
+	<br>
+	Update Ad Redirect 
+	<select name="ad_redirect" id="ad_redirect">
+	  <option value="yes">Yes</option>
+	  <option value="no">No</option>
+	</select>	
+	<br>
+	Update Keyword Redirect 
+	<select name="keyword_redirect" id="keyword_redirect">
+	  <option value="yes">Yes</option>
+	  <option value="no">No</option>
+	</select>
+	<br>
+	Use Adeqo Tracking 
+	<select name="tracking_type" id="tracking_type">
+	  <option value="adeqo">Adeqo</option>
+	  <option value="others">Others</option>
+	</select>
+	<br>
+	Username <input type="text" name="username" id="username">
+	<br>
+	Password <input type="text" name="password" id="password">
+	<br>
+	API Token <input type="text" name="apitoken" id="apitoken">
+	<br>
+	<!-- Monthly Budget <input type="text" name="monthly_budget" id="monthly_budget">
+	<br> -->
+	<input type="button" value="Submit" id="addnewwork_submit">
+</form>
+
+
+networks:<br />
+<%
+cursor = @db[:network].find('company_id' => @user_company_id.to_i)
+cursor.each do |doc|
+	concat doc
+	%>
+	<input type="button" value="Remove User" class="removenetwork_submit" id="<%=doc["id"].to_s%>">
+	<%
+	concat "<br /><br />".html_safe
+end  
+%>
+
+
+<script>
+
+
+$( ".removenetwork_submit" ).click(function() {
+	  
+  var remove_id = $(this).attr("id") 
+  
+	$.ajax({
+		 url: "/removenetwork", 
+		 type: 'POST',
+		 data: { remove_id: remove_id },
+		 success: function(data,status,xhr){
+		 	console.log(data);
+		 	console.log(status);
+		 	// alert(data);
+		 	$( "#"+remove_id ).hide()
+		 },
+		 error: function(xhr,status,error){
+		    console.log(xhr);
+		    console.log(error);
+		    // alert(error);
+		 }
+	});
+  
+  
+});
+
+
+
+
+$( "#addnewwork_submit" ).click(function() {
+
+
+  	var network_name = $('input[name="network_name"]').val();
+	var username = $('input[name="username"]').val();
+	var password = $('input[name="password"]').val();
+	var apitoken = $('input[name="apitoken"]').val();
+	
+	// var monthly_budget = $('input[name="monthly_budget"]').val();
+	
+	if(network_name == "" || username == "" || password == "" || apitoken == "" ){
+		alert("Input All Data");
+		return;
+	}
+	
+	
+	
+	$.ajax({
+	     url: "/createnetwork", 
+	     type: 'POST',
+	     data: $("#addnewwork").serialize(),
+	     success: function(data,status,xhr){
+	     	console.log(data);
+	     	console.log(status);
+		 	// alert(data);
+	     },
+	     error: function(xhr,status,error){
+		    console.log(xhr);
+		    console.log(error);
+		    // alert(error);
+		 }
+    });
+	
+});
+</script>

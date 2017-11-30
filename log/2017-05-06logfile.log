@@ -1,0 +1,97 @@
+# Logfile created on 2017-05-06 00:00:01 +0800 by logger.rb/v1.2.7
+I, [2017-05-06T00:00:01.929618 #54395]  INFO -- : export event file
+I, [2017-05-06T00:00:02.796719 #54395]  INFO -- : export event file done
+I, [2017-05-06T00:00:02.819567 #54395]  INFO -- : export click file
+I, [2017-05-06T00:00:24.409200 #54395]  INFO -- : export click file done
+I, [2017-05-06T01:00:01.651949 #55902]  INFO -- : export event file
+I, [2017-05-06T01:00:01.968960 #55902]  INFO -- : export event file done
+I, [2017-05-06T01:00:01.988903 #55902]  INFO -- : export click file
+I, [2017-05-06T01:00:17.377361 #55902]  INFO -- : export click file done
+I, [2017-05-06T02:00:01.429547 #57404]  INFO -- : export click file
+I, [2017-05-06T02:00:06.656327 #58906]  INFO -- : export event file
+I, [2017-05-06T02:00:06.769069 #58906]  INFO -- : export event file done
+I, [2017-05-06T02:00:13.216576 #57404]  INFO -- : export click file done
+I, [2017-05-06T03:00:01.272872 #58906]  INFO -- : export click file
+I, [2017-05-06T03:00:06.007047 #58906]  INFO -- : export click file done
+I, [2017-05-06T03:00:06.021713 #58906]  INFO -- : export event file
+I, [2017-05-06T03:00:06.138922 #58906]  INFO -- : export event file done
+I, [2017-05-06T04:00:01.430931 #60406]  INFO -- : export event file
+I, [2017-05-06T04:00:01.484074 #60406]  INFO -- : export event file done
+I, [2017-05-06T04:00:01.504571 #60406]  INFO -- : export click file
+I, [2017-05-06T04:00:04.834217 #60406]  INFO -- : export click file done
+I, [2017-05-06T05:00:02.082852 #61923]  INFO -- : export event file
+I, [2017-05-06T05:00:02.123675 #61923]  INFO -- : export event file done
+I, [2017-05-06T05:00:02.136409 #61923]  INFO -- : export click file
+I, [2017-05-06T05:00:05.463450 #61923]  INFO -- : export click file done
+I, [2017-05-06T06:00:01.702443 #63427]  INFO -- : export click file
+I, [2017-05-06T06:00:06.735132 #64918]  INFO -- : export event file
+I, [2017-05-06T06:00:06.795095 #64918]  INFO -- : export event file done
+I, [2017-05-06T06:00:08.421713 #63427]  INFO -- : export click file done
+I, [2017-05-06T07:00:06.560613 #1119]  INFO -- : export event file
+I, [2017-05-06T07:00:06.755717 #1119]  INFO -- : export event file done
+I, [2017-05-06T07:00:06.889096 #1126]  INFO -- : export click file
+I, [2017-05-06T07:00:17.330848 #1126]  INFO -- : export click file done
+I, [2017-05-06T08:00:01.391401 #1126]  INFO -- : export click file
+I, [2017-05-06T08:00:06.446068 #2639]  INFO -- : export event file
+I, [2017-05-06T08:00:08.287820 #2639]  INFO -- : export event file done
+I, [2017-05-06T08:00:16.719900 #1126]  INFO -- : export click file done
+I, [2017-05-06T09:00:01.786891 #1126]  INFO -- : export click file
+I, [2017-05-06T09:00:07.061639 #4146]  INFO -- : export event file
+I, [2017-05-06T09:00:07.623794 #4146]  INFO -- : export event file done
+I, [2017-05-06T09:00:29.100956 #1126]  INFO -- : export click file done
+I, [2017-05-06T10:00:01.156571 #4146]  INFO -- : export event file
+I, [2017-05-06T10:00:02.439909 #4146]  INFO -- : export event file done
+I, [2017-05-06T10:00:02.455249 #4146]  INFO -- : export click file
+I, [2017-05-06T10:00:38.514131 #4146]  INFO -- : export click file done
+I, [2017-05-06T11:00:01.756940 #5648]  INFO -- : export click file
+I, [2017-05-06T11:00:06.946996 #7147]  INFO -- : export event file
+I, [2017-05-06T11:00:08.558466 #7147]  INFO -- : export event file done
+I, [2017-05-06T11:00:52.223936 #5648]  INFO -- : export click file done
+I, [2017-05-06T12:00:01.289342 #7147]  INFO -- : export event file
+I, [2017-05-06T12:00:02.518759 #7147]  INFO -- : export event file done
+I, [2017-05-06T12:00:02.531226 #7147]  INFO -- : export click file
+I, [2017-05-06T12:01:01.828615 #7147]  INFO -- : export click file done
+I, [2017-05-06T13:00:02.086470 #8649]  INFO -- : export click file
+I, [2017-05-06T13:00:07.160590 #10148]  INFO -- : export event file
+I, [2017-05-06T13:00:08.398263 #10148]  INFO -- : export event file done
+I, [2017-05-06T13:00:38.187210 #8649]  INFO -- : export click file done
+I, [2017-05-06T14:00:01.251228 #10148]  INFO -- : export event file
+I, [2017-05-06T14:00:02.216266 #10148]  INFO -- : export event file done
+I, [2017-05-06T14:00:02.229796 #10148]  INFO -- : export click file
+I, [2017-05-06T14:00:38.002351 #10148]  INFO -- : export click file done
+I, [2017-05-06T15:00:01.262694 #11650]  INFO -- : export event file
+I, [2017-05-06T15:00:02.397780 #11650]  INFO -- : export event file done
+I, [2017-05-06T15:00:02.418224 #11650]  INFO -- : export click file
+I, [2017-05-06T15:00:42.755822 #11650]  INFO -- : export click file done
+I, [2017-05-06T16:00:02.033738 #13154]  INFO -- : export click file
+I, [2017-05-06T16:00:06.878366 #14653]  INFO -- : export event file
+I, [2017-05-06T16:00:08.044053 #14653]  INFO -- : export event file done
+I, [2017-05-06T16:00:42.630367 #13154]  INFO -- : export click file done
+I, [2017-05-06T17:00:01.681686 #13154]  INFO -- : export click file
+I, [2017-05-06T17:00:06.769641 #16153]  INFO -- : export event file
+I, [2017-05-06T17:00:07.861689 #16153]  INFO -- : export event file done
+I, [2017-05-06T17:00:42.563221 #13154]  INFO -- : export click file done
+I, [2017-05-06T18:00:01.646333 #16153]  INFO -- : export event file
+I, [2017-05-06T18:00:02.619322 #16153]  INFO -- : export event file done
+I, [2017-05-06T18:00:02.632435 #16153]  INFO -- : export click file
+I, [2017-05-06T18:00:40.147671 #16153]  INFO -- : export click file done
+I, [2017-05-06T19:00:01.203292 #17673]  INFO -- : export event file
+I, [2017-05-06T19:00:02.037029 #17673]  INFO -- : export event file done
+I, [2017-05-06T19:00:02.048686 #17673]  INFO -- : export click file
+I, [2017-05-06T19:00:34.045768 #17673]  INFO -- : export click file done
+I, [2017-05-06T20:00:01.296555 #19173]  INFO -- : export event file
+I, [2017-05-06T20:00:02.186240 #19173]  INFO -- : export event file done
+I, [2017-05-06T20:00:02.200025 #19173]  INFO -- : export click file
+I, [2017-05-06T20:00:33.861112 #19173]  INFO -- : export click file done
+I, [2017-05-06T21:00:02.101769 #20677]  INFO -- : export event file
+I, [2017-05-06T21:00:03.003135 #20677]  INFO -- : export event file done
+I, [2017-05-06T21:00:03.019014 #20677]  INFO -- : export click file
+I, [2017-05-06T21:00:40.200831 #20677]  INFO -- : export click file done
+I, [2017-05-06T22:00:01.428068 #22181]  INFO -- : export event file
+I, [2017-05-06T22:00:02.460071 #22181]  INFO -- : export event file done
+I, [2017-05-06T22:00:02.474215 #22181]  INFO -- : export click file
+I, [2017-05-06T22:00:38.996399 #22181]  INFO -- : export click file done
+I, [2017-05-06T23:00:01.246930 #23678]  INFO -- : export event file
+I, [2017-05-06T23:00:02.142601 #23678]  INFO -- : export event file done
+I, [2017-05-06T23:00:02.156770 #23678]  INFO -- : export click file
+I, [2017-05-06T23:00:32.746557 #23678]  INFO -- : export click file done

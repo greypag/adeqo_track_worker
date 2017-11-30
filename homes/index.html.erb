@@ -1,0 +1,42 @@
+<%
+
+concat "1"
+concat "<br /><br /><br />".html_safe
+
+
+click = @db2[:clicks].find()
+concat click.count.to_i
+
+
+concat "<br /><br /><br />".html_safe
+
+event = @db2[:events].find()
+concat event.count.to_i
+
+
+# 
+# @db2[:clicks].drop()
+# @db2[:events].drop()
+# 
+# @db2[:clicks].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(date: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(destination_url: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(other_parameters: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+# @db2[:clicks].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+# 
+# 
+# @db2[:events].indexes.create_one(check_status: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(date: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(other_parameters: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+# @db2[:events].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+%>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Adeqo</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="DataTables-1.10.7/media/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="DataTables-1.10.7/extensions/ColReorder/css/dataTables.colReorder.min.css" rel="stylesheet">
+	<link href="font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet">
+	<link href="css/gen/main.css" rel="stylesheet">
+	<link href="css/gen/print.css" rel="stylesheet">
+</head>
+<body class="print">
+
+
+
+	<h1>Cumulative Performance</h1>
+	<div class="row">
+		<div class="table-responsive col-sm-12">
+			<table class="table table-condensed">
+				<thead class="bg-light-gray bold">
+					<tr>
+						<th>Campaign</th>
+						<th>Avg Rank</th>
+						<th>Impr.</th>
+						<th>Clicks</th>
+						<th>CTR</th>
+						<th>Cost</th>
+						<th>CPC</th>
+						<th>Conv</th>
+						<th>CVR</th>
+						<th>CPA</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="bg-red bold">Brand</td>
+						<td>1.4</td>
+						<td>2,666</td>
+						<td>356</td>
+						<td>13.35%</td>
+						<td>$1,277.56 </td>
+						<td>$3.59 </td>
+						<td>17</td>
+						<td>4.78%</td>
+						<td>$75.15</td>
+					</tr>
+					<tr>
+						<td class="bg-pink bold">Non-brand</td>
+						<td>1.8</td>
+						<td>52,777</td>
+						<td>1,238</td>
+						<td>2.35%</td>
+						<td>$17,091.77 </td>
+						<td>$13.81 </td>
+						<td>67</td>
+						<td>5.41%</td>
+						<td>$255.10</td>
+					</tr>
+				</tbody>
+				<tfoot class="bg-gray bold">
+					<tr>
+						<td>Total</td>
+						<td>1.6</td>
+						<td>55,443</td>
+						<td>1,594</td>
+						<td>2.88%</td>
+						<td>$18,369.33 </td>
+						<td>$11.52 </td>
+						<td>84</td>
+						<td>5.27%</td>
+						<td>$218.68</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 text-right">
+			<canvas id="bar-chart-1"></canvas>
+		</div>
+		<div class="col-sm-6">
+			<canvas id="bar-chart-2"></canvas>
+		</div>
+	</div>
+
+
+	<h1 class="page-break">Keyword Performance</h1>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="table-responsive col-sm-12">
+					<table class="table table-condensed">
+						<thead class="bold">
+							<tr>
+								<th>Keywords</th>
+								<th>Impr.</th>
+								<th>Clicks</th>
+								<th>Cost</th>
+								<th>CPC</th>
+								<th>Conv</th>
+								<th>CVR</th>
+								<th>CPA</th>
+								<th>Q.S.</th>
+								<th>I.S.</th>
+								<th>Match Type</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>"IELTS"</td>
+								<td>1,967</td>
+								<td>98</td>
+								<td>$1,922.56 </td>
+								<td>$19.62</td>
+								<td>12</td>
+								<td>24.49%</td>
+								<td>$160.21</td>
+								<td>10</td>
+								<td>17.39%</td>
+								<td>Phrase</td>
+							</tr>
+							<tr>
+								<td class="bold">"英文"</td>
+								<td>15,947</td>
+								<td>202</td>
+								<td>$2,286.85 </td>
+								<td>$11.32</td>
+								<td>8</td>
+								<td>7.92%</td>
+								<td>$285.86</td>
+								<td>3</td>
+								<td>< 10%</td>
+								<td>Phrase</td>
+							</tr>
+							<tr>
+								<td>englishtown</td>
+								<td>585</td>
+								<td>128</td>
+								<td>$267.58 </td>
+								<td>$2.09</td>
+								<td>7</td>
+								<td>9.38%</td>
+								<td>$38.23</td>
+								<td>10</td>
+								<td>89.45%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td>english test online</td>
+								<td>766</td>
+								<td>24</td>
+								<td>$444.10 </td>
+								<td>$18.50</td>
+								<td>5</td>
+								<td>75.00%</td>
+								<td>$88.82</td>
+								<td>10</td>
+								<td>78.64%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td>english town hk</td>
+								<td>36</td>
+								<td>16</td>
+								<td>$96.79 </td>
+								<td>$6.05</td>
+								<td>4</td>
+								<td>50.00%</td>
+								<td>$24.20</td>
+								<td>9</td>
+								<td>81.82%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td>"english town"</td>
+								<td>665</td>
+								<td>71</td>
+								<td>$361.67 </td>
+								<td>$5.09</td>
+								<td>3</td>
+								<td>9.86%</td>
+								<td>$120.56</td>
+								<td>10</td>
+								<td>99.70%</td>
+								<td>Phrase</td>
+							</tr>
+							<tr>
+								<td>learn english online</td>
+								<td>1,233</td>
+								<td>68</td>
+								<td>$836.56 </td>
+								<td>$12.30</td>
+								<td>3</td>
+								<td>5.88%</td>
+								<td>$278.85</td>
+								<td>8</td>
+								<td>67.16%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td>TOEFL Practice</td>
+								<td>258</td>
+								<td>11</td>
+								<td>$113.66 </td>
+								<td>$10.33</td>
+								<td>3</td>
+								<td>45.45%</td>
+								<td>$37.89</td>
+								<td>6</td>
+								<td>24.52%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td>English exams</td>
+								<td>184</td>
+								<td>8</td>
+								<td>$167.49 </td>
+								<td>$20.94</td>
+								<td>3</td>
+								<td>112.50%</td>
+								<td>$55.83</td>
+								<td>8</td>
+								<td>54.12%</td>
+								<td>Broad</td>
+							</tr>
+							<tr>
+								<td class="bold">"英語"</td>
+								<td>3,228</td>
+								<td>62</td>
+								<td>$940.68 </td>
+								<td>$15.17</td>
+								<td>2</td>
+								<td>6.45%</td>
+								<td>$470.34</td>
+								<td>3</td>
+								<td>34.72%</td>
+								<td>Phrase</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="table-responsive col-sm-12">
+					<table class="table table-condensed">
+						<thead class="bold">
+							<tr>
+								<th>Devices</th>
+								<th>Impr.</th>
+								<th>Clicks</th>
+								<th>Cost</th>
+								<th>CPC</th>
+								<th>Conv</th>
+								<th>CVR</th>
+								<th>CPA</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="bold">Desktop</td>
+								<td>33,243</td>
+								<td>976</td>
+								<td>$12,251.71 </td>
+								<td>$273.74</td>
+								<td>52</td>
+								<td>5.33%</td>
+								<td>$235.61</td>
+							</tr>
+							<tr>
+								<td class="bold">Mobile</td>
+								<td>19,887</td>
+								<td>563</td>
+								<td>$5,474.99 </td>
+								<td>$202.18</td>
+								<td>27</td>
+								<td>4.80%</td>
+								<td>$202.78</td>
+							</tr>
+							<tr>
+								<td class="bold">Tablet</td>
+								<td>2,313</td>
+								<td>55</td>
+								<td>$642.63 </td>
+								<td>$174.15</td>
+								<td>5</td>
+								<td>9.09%</td>
+								<td>$128.53</td>
+							</tr>
+							<tr class="bold">
+								<td></td>
+								<td>55443.0</td>
+								<td>1,594</td>
+								<td>$18,369.33</td>
+								<td>$650.07</td>
+								<td>84</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3 pie-charts-container">
+			<div class="pie-chart-container">
+				<h5>Conversions</h5>
+				<canvas id="pie-chart-1"></canvas>
+			</div>
+			<div class="pie-chart-container">
+				<h5>Clicks</h5>
+				<canvas id="pie-chart-2"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<h1 class="page-break">Creative Copy Performance</h1>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="table-responsive col-sm-12">
+					<table class="table table-condensed">
+						<thead class="bg-red bold">
+							<tr>
+								<td>Desktop Ad Copy</td>
+								<td>Impr.</td>
+								<td>Clicks</td>
+								<td>Cost</td>
+								<td>Conv</td>
+								<td>CPC</td>
+								<td>CVR</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><img class="ad-copy" src="images/print-ad1.png"></td>
+								<td>2,739</td>
+								<td>115</td>
+								<td>$2,377.79 </td>
+								<td>12</td>
+								<td>$20.68</td>
+								<td>10.43%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="table-responsive col-sm-12">
+					<table class="table table-condensed">
+						<thead class="bg-red bold">
+							<tr>
+								<td>Desktop Ad Copy</td>
+								<td>Impr.</td>
+								<td>Clicks</td>
+								<td>Cost</td>
+								<td>Conv</td>
+								<td>CPC</td>
+								<td>CVR</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><img class="ad-copy" src="images/print-ad2.png"></td>
+								<td>908</td>
+								<td>115</td>
+								<td>$393.57</td>
+								<td>4</td>
+								<td>$3.42</td>
+								<td>3.48%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-3 pie-charts-container">
+			<div class="pie-chart-container">
+				<h5>Conversions</h5>
+				<canvas id="pie-chart-3"></canvas>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/accounting.min.js"></script>
+	<script type="text/javascript" src="bootstrap-datepicker-1.4.0-dist/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="Chart.js-master/Chart.min.js"></script>
+	<script type="text/javascript" src="DataTables-1.10.7/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="DataTables-1.10.7/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/print.js"></script>
+</body>
+</html>

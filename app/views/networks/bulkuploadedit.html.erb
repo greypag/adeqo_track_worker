@@ -1,0 +1,122 @@
+<div class="content_title">Bulk Upload</div>
+<ul class="tab_menu">
+	<li><a class="tab_tag history_log_tag" href="/bulkupload/add">Add</a></li>
+	<li><a class="tab_tag history_log_tag active" href="javascript:;">Edit</a></li>
+	<li><a class="tab_tag search_tag" href="/bulk/summary">Summary</a></li>
+</ul>
+
+<%
+port_array = [81,83]
+# port_array = [81,83,85,87]
+random_port = port_array.shuffle.sample
+%>
+
+<div class="content_outer">
+	<div class="content_core">
+		
+		<div class="content_core_title">Use spreadsheets to make bulk changes to your campaigns</div>
+		<hr>
+		
+		<div class="content_form">
+			
+			<div class="content_form">
+				<form action="http://china.adeqo.com:<%=random_port.to_s%>/bulkjob" method="post" id="uploadForm" enctype="multipart/form-data" autocomplete="off" target="hiddenUploadIframe">
+					
+					<div class="form_row">
+						<div class="content_form_label">
+							<label class="form_label">Upload type:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input">
+							<input type="radio" name="upload_type" value="campaigns" checked> <label>Campaigns</label>
+							<input type="radio" name="upload_type" value="adgroup"> <label>Ad Groups</label>
+							<input type="radio" name="upload_type" value="ad"> <label>Ads</label>
+							<input type="radio" name="upload_type" value="keyword"> <label>Keywords</label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<hr>
+					<!--
+					<div class="form_row">
+						<div class="content_form_label" style="min-width:400px;">
+							<label class="form_label">Please select channel and account:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input">
+							<select class="form_field" name="account" id="account">
+								<%
+								usernetwork_array = []
+								@user_network = @db[:network_user].find('user' => session[:user_id].to_i)
+								@db.close
+								
+								@user_network.each do |usernetwork|
+									usernetwork_array << usernetwork["network_id"].to_i
+								end
+								
+								# @networks = @db[:network].find('company_id' => @user_company_id.to_i)
+								@networks = @db[:network].find('id' => { "$in" => usernetwork_array})
+								if @networks.count.to_i > 0
+									@networks.each do |network|
+										%><option name="<%=network['type']%>" value="<%=network['id']%>"><%=network['name']%></option><%
+									end
+								end
+								%>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+						
+					</div>
+					<hr>
+					-->
+					
+					<div class="form_row">
+						<strong>Upload</strong>
+					</div>
+					<div class="form_row">
+						Select a file containing the changes to your campaign. Supported format - .xlsx<br />
+						<a href="/csv_template/Bulk_Edit_Excel_Template.zip">Example Here</a>
+					</div>
+					<div class="form_row upload-row">
+						<input type="hidden" name="type" />
+						<input type="file" name="file"/>
+						<span id="upload_error" class="error_message"></span>
+					</div>
+					
+					<hr>
+					
+					<div class="form_row">
+						<div class="content_form_label">
+							<label class="form_label">Post to Channel Options</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input">
+							<input type="radio" name="status" value="0" checked> Upload changes in "Queued" status
+							<br />
+							<input type="radio" name="status" value="3"> Upload changes in "On Hold" status
+							
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					<input type="hidden" name="bulk_type" value="edit">
+					<input type="hidden" name="user_email" value="<%=@current_user_email.to_s%>"> 
+					
+					
+					<div class="form_row">&nbsp;</div>
+					<div class="form_row">
+						<button type="button" class="button red_button submit_button" onclick="submitbulkUpload('apply');">Process</button>
+						<button type="button" class="button white_button cancel_button" onclick="resetBulkUploadForm();">Cancel</button>
+					</div>
+					
+				</form>
+				
+				<iframe id="hiddenUploadIframe" name="hiddenUploadIframe" height="0" width="0" frameborder="0" scrolling="yes"></iframe>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>

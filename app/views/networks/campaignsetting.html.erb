@@ -1,0 +1,110 @@
+<%= render partial: "campaign_tab_menu.html.erb" %>
+
+<%
+ @username 
+ @password
+ @api_token
+%>
+
+
+<div class="content_outer">
+	<div class="content_core">
+		<div class="content_form">
+			<form action="" method="post" id="adgroupSettingForm" autocomplete="off">
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_campaign_name" class="form_label pull-right">Campaign Name:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<input id="adgroup_setting_campaign_name" name="" type="text" value="<%=@title.to_s%>" autocomplete="off" class="form_field"/><br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Network:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<div class="form_field fixed_field"><%=@type.to_s.capitalize%></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_status" class="form_label pull-right">Status:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="adgroup_setting_status" name="" class="form_field">
+							<option value="sc"><%=@status%></option>
+						</select>
+						<br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_start_date" class="form_label pull-right">Start Date:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left datepicker-container">
+						<input id="adgroup_setting_start_date" name="" type="text" class="datepicker-field form_field">
+						<span class="caret input-caret"></span>
+						<br/>
+						<span id="adgroup_setting_campaign_name_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_end_date" class="form_label pull-right">End Date:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left datepicker-container">
+						<input id="adgroup_setting_end_date" name="" type="text" class="datepicker-field form_field">
+						<span class="caret input-caret"></span>
+						<br/>
+						<span id="adgroup_setting_end_date_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_geo_targeting" class="form_label pull-right">Geo Targeting:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="adgroup_setting_geo_targeting" name="" class="form_field">
+							<option value="">China</option>
+						</select>
+						<br/>
+						<span id="adgroup_setting_geo_targeting_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label for="adgroup_setting_language" class="form_label pull-right">Language Targeting:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select id="adgroup_setting_language" name="" class="form_field">
+							<option value="sc">Simplified Chinese</option>
+						</select>
+						<br/>
+						<span id="adgroup_setting_language_error" class="error_message"></span><br/>
+
+						<div class="button white_button cancel_button pull-right" onclick="$('#adgroupSettingForm')[0].reset();">Reset</div>
+						<div class="button red_button submit_button pull-right" onclick="">Update</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

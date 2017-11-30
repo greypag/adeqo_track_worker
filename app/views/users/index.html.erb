@@ -1,0 +1,852 @@
+<h1>Listing users</h1>
+
+
+<%
+# cursor = @db[:all_campaign].find()
+# @db.close
+%>
+
+<%
+
+# @current_user.each do |doc|
+	# @name = doc["username"]
+	# @user_role = doc["role"]
+	# @status = doc["status"]
+	# @email = doc["email"]
+# end
+%>
+
+
+
+
+
+
+
+
+<hr>
+Test:<br /> 
+<%
+
+
+# @index = 0
+# cursor = @db[:ad_360].find('ad_id' => 2230638920)
+# 
+# # cursor = @db[:network_edit_record].find()
+# # concat cursor.count.to_i
+# 
+# cursor.each do |doc|
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# end  
+# 
+# 
+# concat "<hr>".html_safe
+%>
+
+
+<%
+
+
+# cursor = @db[:keyword_360].find('keyword_id' => 2830169184)
+# # 
+# # # cursor = @db[:network_edit_record].find()
+# # # concat cursor.count.to_i
+# # 
+# cursor.each do |doc|
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# end  
+# 
+# 
+# concat "<hr>".html_safe
+%>
+
+
+<%
+# cursor = @db[:campaign_360].find('network_id' => 19)
+# concat cursor.count.to_i
+# 
+# @index = 0
+# cursor.each do |doc|
+  # if @index.to_i < 300
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# 	  
+	  # @index = @index + 1
+  # else
+  	  # break
+  # end
+# end  
+# 
+# concat "<hr>".html_safe
+%>
+
+<%
+# cursor = @db[:adgroup_360].find('network_id' => 19)
+# concat cursor.count.to_i
+# 
+# @index = 0
+# cursor.each do |doc|
+  # if @index.to_i < 300
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# 	  
+	  # @index = @index + 1
+  # else
+  	  # break
+  # end
+# end  
+# 
+# concat "<hr>".html_safe
+%>
+
+<%
+# cursor = @db[:ad_360].find('network_id' => 19)
+# concat cursor.count.to_i
+# @index = 0
+# cursor.each do |doc|
+  # if @index.to_i < 300
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# 	  
+	  # @index = @index + 1
+  # else
+  	  # break
+  # end
+# end  
+# 
+# concat "<hr>".html_safe
+%>
+
+
+<%
+# cursor = @db[:keyword_sogou].find()
+# concat cursor.count.to_i
+# # @index = 0
+# # cursor.each do |doc|
+  # # if @index.to_i < 300
+	  # # concat doc
+	  # # concat "<br /><br />".html_safe
+# # 	  
+	  # # @index = @index + 1
+  # # else
+  	  # # break
+  # # end
+# # end  
+# 
+# concat "<hr>".html_safe
+%>
+
+
+<%
+# cursor = @db[:sogou_report_account].find("report_date"=>"2015-08-11")
+# concat cursor.count.to_i
+# 
+# @index = 0
+# cursor.each do |doc|
+  # if @index.to_i < 300
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# 	  
+	  # @index = @index + 1
+  # else
+  	  # break
+  # end
+  # concat "<br /><br />".html_safe
+# end  
+# 
+# concat "<hr>".html_safe
+%>
+
+
+<%
+# cursor = @db[:sogou_report_campaign].find()
+# concat cursor.count.to_i
+# 
+# @index = 0
+# cursor.each do |doc|
+  # if @index.to_i < 300
+	  # concat doc
+	  # concat "<br /><br />".html_safe
+# 	  
+	  # @index = @index + 1
+  # else
+  	  # break
+  # end
+  # concat "<br /><br />".html_safe
+# end  
+# 
+# concat "<hr>".html_safe
+
+
+
+# @db[:sogou_report_account].drop()
+# @db[:sogou_report_campaign].drop()
+%>
+
+
+
+
+
+<%
+# cursor = @db[:sogou_report_adgroup].find()
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+
+
+
+# @db[:sogou_report_account].drop()
+# @db[:sogou_report_campaign].drop()
+%>
+
+
+
+
+
+
+%>
+
+
+<%
+# cursor = @db[:sogou_report_keyword].find()
+# concat cursor.count.to_i
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+# concat "<hr>".html_safe
+
+
+
+# @db[:sogou_report_account].drop()
+# @db[:sogou_report_campaign].drop()
+# @db[:sogou_report_adgroup].drop()
+# @db[:sogou_report_ad].drop()
+# @db[:sogou_report_keyword].drop()
+%>
+
+
+<%
+# cursor = @db[:last_report_update].find()
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+
+%>
+
+
+
+<hr>
+<%
+# cursor = @db[:sogou_avg_position_desktop].find()
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+
+%>
+
+
+<hr>
+<%
+# cursor = @db[:sogou_avg_position_mobile].find()
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+
+%>
+
+
+
+
+
+
+<%
+
+ # @db[:user].indexes.create_one(username: Mongo::Index::ASCENDING)
+ # @db[:user].indexes.create_one(password: Mongo::Index::ASCENDING)
+ # @db[:user].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+ # @db[:user].indexes.create_one(email: Mongo::Index::ASCENDING)
+# 
+ # @db[:company].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:company].indexes.create_one(role: Mongo::Index::ASCENDING)
+ # @db[:company].indexes.create_one(status: Mongo::Index::ASCENDING)
+ # @db[:company].indexes.create_one(id: Mongo::Index::ASCENDING)
+#  
+ # @db[:network_user].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:network_user].indexes.create_one(user: Mongo::Index::ASCENDING)
+#  
+ # @db[:network].indexes.create_one(id: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(type: Mongo::Index::ASCENDING)
+ 
+ 
+ # @db[:network].indexes.create_one(accountid: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(balance: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(budget: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(domains: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(regions: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(total_pay: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(quota: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(file_update_1: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(file_update_2: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(file_update_3: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(file_update_4: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(tmp_file: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(fileid: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(file_update: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(api_secret: Mongo::Index::ASCENDING)
+ # @db[:network].indexes.create_one(status: Mongo::Index::ASCENDING)
+#  
+ # @db[:campaign_sogou].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:campaign_sogou].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:campaign_sogou].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:campaign_sogou].indexes.create_one(status: Mongo::Index::ASCENDING)
+# 
+ # @db[:adgroup_sogou].indexes.create_one(status: Mongo::Index::ASCENDING) 
+ # @db[:adgroup_sogou].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:adgroup_sogou].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:adgroup_sogou].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:adgroup_sogou].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+# # 
+# # 
+ # @db[:ad_sogou].indexes.create_one(title: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(cpc_idea_id: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(cpc_idea_id_2: Mongo::Index::ASCENDING)
+ # @db[:ad_sogou].indexes.create_one(status: Mongo::Index::ASCENDING)
+#  
+ # @db[:keyword_sogou].indexes.create_one(keyword: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(status: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(use_grp_price: Mongo::Index::ASCENDING)
+#  
+ # @db[:keyword_sogou].indexes.create_one(price: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(visit_url: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(mobile_visit_url: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(match_type: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(pause: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(cpc_quality: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(active: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(mobile_match_type: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(keyword_not_show_reason: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(keyword_not_approve_reason: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(update_date: Mongo::Index::ASCENDING)
+ # @db[:keyword_sogou].indexes.create_one(create_date: Mongo::Index::ASCENDING)
+ 
+ 
+ # @db[:sogou_report_account].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_account].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+#  
+#  
+#  
+ # @db[:sogou_report_campaign].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(cpc_plan_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_campaign].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+#  
+#  
+  # @db[:sogou_report_adgroup].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(cpc_plan_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(cpc_grp_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_adgroup].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+#  
+#  
+  # @db[:sogou_report_ad].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(cpc_plan_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(cpc_grp_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(title: Mongo::Index::ASCENDING)
+#  
+ # @db[:sogou_report_ad].indexes.create_one(visit_url: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(show_url: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(mobile_visit_url: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(mobile_show_url: Mongo::Index::ASCENDING)
+#  
+ # @db[:sogou_report_ad].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_ad].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+#  
+ # @db[:sogou_report_keyword].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(cpc_plan_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(cpc_grp_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(cpc_grp_name: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(keyword: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(display: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+ # @db[:sogou_report_keyword].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+# # 
+# # 
+				 # @db[:clicks].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+				 # @db[:clicks].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(network_type: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+ # @db[:clicks].indexes.create_one(target_id: Mongo::Index::ASCENDING)
+					 # @db[:clicks].indexes.create_one(other_parameters: Mongo::Index::ASCENDING)
+					 # @db[:clicks].indexes.create_one(date: Mongo::Index::ASCENDING)
+					 # @db[:clicks].indexes.create_one(destination_url: Mongo::Index::ASCENDING)
+# # # 
+# # 
+# # 
+ # @db[:events].indexes.create_one(id: Mongo::Index::ASCENDING)
+ # @db[:events].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+ # @db[:events].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+ # @db[:events].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+ # @db[:events].indexes.create_one(other_param: Mongo::Index::ASCENDING)
+ # @db[:events].indexes.create_one(date: Mongo::Index::ASCENDING)
+#  
+ # @db[:event].drop()
+# # 
+# # 
+# # 
+# #
+# @db[:campaign_360].indexes.create_one(id: Mongo::Index::ASCENDING) 
+# @db[:campaign_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(account_id: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(extend_ad_type: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(start_date: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(end_date: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(account_name: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(status: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(sys_status: Mongo::Index::ASCENDING)  
+# @db[:campaign_360].indexes.create_one(update_date: Mongo::Index::ASCENDING)
+# @db[:campaign_360].indexes.create_one(create_date: Mongo::Index::ASCENDING)
+# # # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # #
+# @db[:adgroup_360].indexes.create_one(id: Mongo::Index::ASCENDING) 
+# @db[:adgroup_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(account_id: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(account_name: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(adgroup_name: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(status: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(sys_status: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(update_date: Mongo::Index::ASCENDING)
+# @db[:adgroup_360].indexes.create_one(create_date: Mongo::Index::ASCENDING)
+# # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # # 
+# # #
+# @db[:ad_360].indexes.create_one(id: Mongo::Index::ASCENDING) 
+# @db[:ad_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(account_id: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(account_name: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(title: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(status: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(sys_status: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(update_date: Mongo::Index::ASCENDING)
+# @db[:ad_360].indexes.create_one(create_date: Mongo::Index::ASCENDING)
+# 
+# # 
+# # 
+# #
+# @db[:keyword_360].indexes.create_one(id: Mongo::Index::ASCENDING) 
+# @db[:keyword_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(account_id: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(account_name: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(keyword: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(status: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(sys_status: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(price: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(update_date: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(create_date: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(cpc_quality: Mongo::Index::ASCENDING)
+# @db[:keyword_360].indexes.create_one(cpc_quality: Mongo::Index::ASCENDING)
+# # 
+# # 
+# # 
+# # 
+# # 
+# # 
+# # 
+# 
+# @db[:report_ad_360].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(group_id: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(views: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+# @db[:report_ad_360].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+# 
+# 
+# 
+# 
+# @db[:report_keyword_360].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(keyword: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(group_id: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(views: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+# @db[:report_keyword_360].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+
+
+
+# @db[:report_account_360].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(name: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(display: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+# @db[:report_account_360].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+# 
+# 
+# @db[:report_campaign_360].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(report_date: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(name: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(cpc_plan_id: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(cpc_plan_name: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(display: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+# @db[:report_campaign_360].indexes.create_one(clicks: Mongo::Index::ASCENDING)
+# 
+# 
+# @db[:conversion].indexes.create_one(id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(random_number: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(session_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(company_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(network_type: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(adgroup_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(ad_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(keyword_id: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(revenue: Mongo::Index::ASCENDING)
+# @db[:conversion].indexes.create_one(date: Mongo::Index::ASCENDING)
+
+# @db[:report_adgroup_360].indexes.create_one(cpc_grp_name: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(clicks_avg_price: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(display: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(click_rate: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(click: Mongo::Index::ASCENDING)
+# @db[:report_adgroup_360].indexes.create_one(avg_position: Mongo::Index::ASCENDING)
+
+# @db[:cache_campaign].drop()
+# 
+# @db[:cache_campaign_sogou].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(status: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(link: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(network_type: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(network_name: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(currency: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(impression: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(click: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(cpc: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(ctr: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(conversion: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(conv_rate: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(cpa: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(revenue: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(profit: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(avg_pos: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(rpa: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(roas: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(start_date: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_sogou].indexes.create_one(end_date: Mongo::Index::ASCENDING)
+#       
+#       
+#       
+ # @db[:cache_campaign_360].indexes.create_one(campaign_id: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(status: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(campaign_name: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(link: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(network_type: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(network_name: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(currency: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(impression: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(click: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(total_cost: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(cpc: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(ctr: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(conversion: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(conv_rate: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(cpa: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(revenue: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(profit: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(avg_pos: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(rpa: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(roas: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(start_date: Mongo::Index::ASCENDING)
+      # @db[:cache_campaign_360].indexes.create_one(end_date: Mongo::Index::ASCENDING)      
+
+
+
+ # @db[:advancesearchjob].indexes.create_one(network_id: Mongo::Index::ASCENDING)
+ # @db[:advancesearchjob].indexes.create_one(network_type: Mongo::Index::ASCENDING)
+ # @db[:advancesearchjob].indexes.create_one(user_email: Mongo::Index::ASCENDING)
+ # @db[:advancesearchjob].indexes.create_one(process: Mongo::Index::ASCENDING)
+ # @db[:advancesearchjob].indexes.create_one(request_date: Mongo::Index::ASCENDING)
+
+
+# cursor = @db[:keyword_sogou].find('network_id' => 1)
+# cursor.each do |doc|
+  # concat doc
+  # concat "<br /><br />".html_safe
+# end  
+
+# @index = 0
+# @sogou_campaign = @db[:keyword_sogou].find('network_id' => 8)
+# @sogou_campaign.each do |doc|
+# 	
+	# if @index.to_i == 3000
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end  
+
+
+# @index = 0
+# @sogou_campaign = @db[:keyword_sogou].find('network_id' => 10)
+# concat @sogou_campaign.count.to_i
+# @sogou_campaign.each do |doc|
+# 	
+# 	 
+# 	
+	# concat doc
+	# concat "<br /><br />".html_safe
+	# @index = @index + 1
+# end
+
+# 
+# concat "ad 360"
+# concat "<br /><br />".html_safe
+# @index = 0
+# @campaign_360 = @db[:ad_360].find('network_id' => 19)
+# @campaign_360.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end  
+
+
+
+# results = @db[:report_ad_360].find.aggregate([ { '$match' => { 'network_id' => 18,
+				                                                # 'report_date' => '2015-08-11' } },
+				                                # { '$group' => { '_id' => '$network_id', 
+				                                                # 'views' => { '$sum' => '$views' },
+				                                                # 'total_cost' => { '$sum' => '$total_cost' },
+				                                                # 'clicks' => { '$sum' => '$clicks' } 
+# 				                                                
+				                                               # } }
+				                              # ])
+# 
+# results.each do |result|
+  # concat result['views'].to_i
+  # concat "<br>".html_safe
+  # concat result['total_cost'].to_i
+# end
+# 
+# 
+# 
+# 
+# concat "report camp 360"
+# concat "<br /><br />".html_safe
+# @index = 0
+# @sogou_campaign = @db[:report_campaign_360].find('network_id' => 19)
+# 
+# concat "<br /><br />".html_safe
+# concat @sogou_campaign.count.to_i
+# 
+# @sogou_campaign.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end
+# 
+# 
+# 
+# concat "report account 360"
+# concat "<br /><br />".html_safe
+# @index = 0
+# @sogou_campaign = @db[:report_account_360].find('network_id' => 19)
+# 
+# concat "<br /><br />".html_safe
+# concat @sogou_campaign.count.to_i
+# 
+# @sogou_campaign.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end  
+# 
+# 
+# 
+# concat "report ad 360"
+# concat "<br /><br />".html_safe
+# @index = 0
+# @sogou_campaign = @db[:report_ad_360].find('network_id' => 80, 'ad_id' => 3773367767)
+# 
+# concat "<br /><br />".html_safe
+# concat @sogou_campaign.count.to_i
+# 
+# @sogou_campaign.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end
+
+
+
+# 
+# 
+# concat "report ad 360"
+# concat "<br /><br />".html_safe
+# @index = 0
+# @sogou_campaign = @db[:report_ad_360].find('network_id' => 80, 'ad_id' => 3773367767)
+# 
+# concat "<br /><br />".html_safe
+# concat @sogou_campaign.count.to_i
+# 
+# @sogou_campaign.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end
+# 
+# 
+#
+# concat "test"
+# concat "<br /><br />".html_safe
+# @index = 0 
+# @conversion_date = @db[:conversion].find('company_id' => 1) 
+# @conversion_date = @db[:conversion].find('company_id' => 1, 'date' => '2015-08-31' )
+# @report_keyword_360 = @db[:report_keyword_360].find('keyword_id' => 2421612027)
+# 
+# concat "<br /><br />".html_safe
+# concat @sogou_campaign.count.to_i
+# 
+# @conversion_date.each do |doc|
+# 	
+	# if @index.to_i == 100
+		# # break
+	# end 
+  	# concat doc
+  	# concat "<br /><br />".html_safe
+  	# @index = @index + 1 
+# end
+
+
+  
+%>

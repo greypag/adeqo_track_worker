@@ -1,0 +1,186 @@
+<div class="content_title">Account Settings</div>
+<%= render partial: "account_tab_menu.html.erb" %>
+
+<div class="content_outer">
+	<div class="content_core">
+		<%
+		
+		@sub_users = @db[:user].find('company_id' => @user_company_id)
+		@db.close
+		
+		@network = @db[:network].find('company_id' => @user_company_id)
+		@db.close
+		
+		@network_arr = []
+		@sub_users_arr = []
+		
+		
+		
+		@network_hash = {}
+		@network_id_arr = []
+		@sub_users_id_arr = []
+		
+		
+		if @sub_users.count.to_i > 0
+			@sub_users.each do |sub_users|
+				@sub_users_arr << sub_users
+				@sub_users_id_arr << sub_users["id"]
+			end
+		end
+		
+		
+		if @network.count.to_i > 0
+			@network.each do |network|
+				@network_arr << network
+				
+				@network_id_arr << network["id"].to_s
+				@network_hash["id"+network["id"].to_s] = network
+			end
+		end
+		
+		
+		
+		@user_allow_network_hash = {}
+		@user_allow_network = @db[:network_user].find("user" => { "$in" => @sub_users_id_arr})
+		
+		@user_allow_network.each do |user_allow_network|
+			if @user_allow_network_hash["id"+user_allow_network["user"].to_s]
+				@user_allow_network_hash["id"+user_allow_network["user"].to_s] += "," +user_allow_network["network_id"].to_s
+			else
+				@user_allow_network_hash["id"+user_allow_network["user"].to_s] = user_allow_network["network_id"].to_s
+			end
+		end
+		
+		
+		
+		if @sub_users_arr.count.to_i > 0
+			@sub_users_arr.each do |subuser|		
+				if session[:user_id] != subuser["id"].to_i
+					
+					user_network_id_array = []
+					not_user_network_id_array = []
+					
+					if @user_allow_network_hash["id"+subuser["id"].to_s]
+						
+						user_network_id_array = @user_allow_network_hash["id"+subuser["id"].to_s].split(",")
+						user_network_id_array = user_network_id_array.uniq.sort 
+						
+						not_user_network_id_array = @network_id_arr - user_network_id_array
+						
+						# concat @network_id_arr
+						# concat "<br />".html_safe
+						# concat user_network_id_array
+						# concat "<br />".html_safe
+						# concat	@network_id_arr - user_networl_id_array
+					end
+					
+					# concat "<br /><br />".html_safe
+					%>
+					
+					<div class="portfolio_container">
+						<div class="content_item"><%=subuser["username"]%> (<%=subuser["email"]%>)</div>
+						
+						<div class="content_item">
+							<div class="portfolio_select_container">
+								<div class="portfolio_select_header button" onclick="toggleHiddenPortfolio(this);">Advertising accounts in this portfolio:<span class="downArrow pull-right"></span></div>
+								<div class="portfolio_select_hidden">
+									<hr/>
+									<form action="" method="post" id="portfolioDeleteForm_<%=subuser["id"]%>" autocomplete="off">
+										<input type="hidden" name="user_id" id="delete_user_id" value="<%=subuser["id"]%>">
+											<% 
+											if user_network_id_array.count.to_i > 0 
+												user_network_id_array.each do |user_network_id_array_d|
+											%>
+													<div class="portfolio_select_option"><input type="checkbox" name="network_id_array[]" value="<%=@network_hash["id"+user_network_id_array_d.to_s]["id"]%>"/><%=@network_hash["id"+user_network_id_array_d.to_s]["name"]%></div>
+											<% 
+												end
+											end 
+											%>
+									</form>
+									<hr/>
+									<div class="portfolio_select_button_container">
+										<input type="checkbox" value="<%=subuser["id"]%>" onchange="selectAllPortfolioOption(this,'portfolioDeleteForm_<%=subuser["id"]%>');"/>Select all
+										<div class="button red_button submit_button central_button" onclick="submitPortfolioDelete('portfolioDeleteForm_<%=subuser["id"]%>');">Remove from this portfolio</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="content_item">
+							<div class="portfolio_select_container">
+								<div class="portfolio_select_header button" onclick="toggleHiddenPortfolio(this);">Select Advertising account to add to this portfolio <span class="downArrow pull-right"></span></div>
+								<div class="portfolio_select_hidden">
+									<hr/>
+									<form action="" method="post" id="portfolioAddForm_<%=subuser["id"]%>" autocomplete="off">
+										<input type="hidden" name="user_id" id="add_user_id" value="<%=subuser["id"]%>">
+										<%
+										
+										if not_user_network_id_array.count.to_i > 0 
+											not_user_network_id_array.each do |not_user_network_id_array_d|
+										%>
+												<div class="portfolio_select_option"><input type="checkbox" name="network_id_array[]" value="<%=@network_hash["id"+not_user_network_id_array_d.to_s]["id"]%>"/><%=@network_hash["id"+not_user_network_id_array_d.to_s]["name"]%></div>
+										<% 
+											end
+										end 
+										%>
+									</form>
+									<hr/>
+									<div class="portfolio_select_button_container">
+										<input type="checkbox" value="<%=subuser["id"]%>" onchange="selectAllPortfolioOption(this,'portfolioAddForm_<%=subuser["id"]%>');"/>Select all
+										<div class="button red_button submit_button central_button" onclick="submitPortfolioAdd('portfolioAddForm_<%=subuser["id"]%>');">Add to this portfolio</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<%
+				end
+			end
+		end
+		
+		%>
+		
+		
+		<!-- <div class="portfolio_container">
+			<div class="content_item">John Smith (john@smith.com)</div>
+			<div class="content_item"><span class="remove_icon button" title="remove" onclick=""></span>Qihoo 360: BMG - Asia</div>
+			<div class="content_item"><span class="remove_icon button" title="remove" onclick=""></span>BMG - North America</div>
+			<div class="content_item">
+				<div class="portfolio_select_container">
+					<div class="portfolio_select_header button" onclick="toggleHiddenPortfolio(this);">Select Advertising account to add to this portfolio <span class="downArrow pull-right"></span></div>
+					<div class="portfolio_select_hidden">
+						<hr/>
+						<form action="" method="post" id="portfolioForm_1" autocomplete="off">
+							<div class="portfolio_select_option"><input type="checkbox" name="account_array[]" value="apihotel@sogou.com"/>apihotel@sogou.com</div>
+							<div class="portfolio_select_option"><input type="checkbox" name="account_array[]" value="apihotel@sogou.com"/>apihotel@sogou.com</div>
+							<div class="portfolio_select_option"><input type="checkbox" name="account_array[]" value="apihotel@sogou.com"/>apihotel@sogou.com</div>
+						</form>
+						<hr/>
+						<div class="portfolio_select_button_container">
+							<input type="checkbox" value="1" onchange="selectAllPortfolioOption(this,'portfolioForm_1');"/>Select all
+							<div class="button red_button submit_button central_button" onclick="">Submit</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		
+
+	</div>
+</div>
+<div class="modal fade" id="portfolio_error_modal" tabindex="-1" role="dialog" aria-labelledby="portfolio_error_modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<div id="portfolio_error_content" class="modal_title user_remove_title"></div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="button red_button submit_button" onclick="$('#portfolio_error_modal').modal('hide');">OK</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

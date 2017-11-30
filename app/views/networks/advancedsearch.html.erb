@@ -1,0 +1,431 @@
+<div class="content_title">Advanced Search</div>
+<ul class="tab_menu">
+	<li><a class="tab_tag history_log_tag" href="/advancedsearchistory">History / Log</a></li>
+	<li><a class="tab_tag search_tag active" href="javascript:;">Search</a></li>
+</ul>
+<div class="content_outer">
+	<div class="content_core">
+		<div class="content_core_title">Search and Edit</div>
+		<hr>
+		<div class="content_form">
+			<form action="" method="post" id="advancesearchForm" autocomplete="off">
+				
+				
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Select Account:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select class="form_field" name="account" id="account">
+							<%
+							usernetwork_array = []
+							@user_network = @db[:network_user].find('user' => session[:user_id].to_i)
+							@db.close
+							
+							@user_network.each do |usernetwork|
+								usernetwork_array << usernetwork["network_id"].to_i
+							end
+							
+							# @networks = @db[:network].find('company_id' => @user_company_id.to_i)
+							@networks = @db[:network].find('id' => { "$in" => usernetwork_array})
+							if @networks.count.to_i > 0
+								@networks.each do |network|
+									%><option name="<%=network['type']%>" value="<%=network['id']%>"><%=network['name']%></option><%
+								end
+							end
+							%>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<hr>
+				
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Search for:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select class="form_field" name="page">
+							<option value="Campaign">Campaign</option>
+							<option value="Ad Groups">Ad Groups</option>
+							<option value="Ads">Ads</option>
+							<option value="Keywords">Keywords</option>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<hr>
+
+				
+
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Using data from:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select class="form_field" name="date_range">
+							<option value="Yesterday">Yesterday</option>
+							<option value="Last 7 days">Last 7 days</option>
+							<option value="Last 30 days">Last 30 days</option>
+							<option value="This Week">This Week</option>
+							<option value="Last Week">Last Week</option>
+							<option value="This Month">This Month</option>
+							<option value="Last Month">Last Month</option>
+							<option value="Last 3 Months">Last 3 Months</option>
+						</select>
+					</div>
+					<div style="display: none;">
+						<input type="text" id="start_date" name="start_date" class="datepicker-field">
+						<input type="text" id="end_date" name="end_date" class="datepicker-field">
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<hr>
+
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">Requirements:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<div id="rules-content">
+							<div class="form_row filter_row">
+								<div class="pull-left">
+									<select name="field_name" class="form_field form_field_require" onchange="selectRuleField(this);">
+										
+										<option class="campaign" value="status">Status</option>
+										<option class="campaign" value="campaign_name">Campaign</option>
+										<option class="campaign" value="avg_cpc">Avg. CPC</option>
+										<option class="campaign" value="impr">Impr.</option>
+										<option class="campaign" value="clicks">Clicks</option>
+										<option class="campaign" value="ctr">CTR</option>
+										<option class="campaign" value="cost">Cost</option>
+										<option class="campaign" value="conv">Conversions</option>
+										<option class="campaign" value="conv_rate">Conv.Rate</option>
+										<option class="campaign" value="cpa">CPA</option>
+										<option class="campaign" value="avg_pos">Avg.Pos</option>
+										
+									</select>
+								</div>
+			
+								<div class="field_container pull-left">
+									<input type="hidden" name="field_rule" class="form_field" value="="/>
+									
+									<select name="field_value" class="form_field">
+										<option value="Active">Active</option>
+										<option value="Inactive">Inactive</option>
+									</select>
+								</div>
+								<span class="remove_icon" onclick="removeRule(this)"></span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="form_row">
+							Add rules <span class="add_icon" onclick="addRule()"></span>
+						</div>
+						<!-- <div class="form_row">
+							<button type="button" class="button red_button submit_button pull-left" onclick="checkRules();">Verify</button>
+							<button type="button" id="export_button" class="button red_button cancel_button submit_button disabled pull-left" onclick="submitExportData();" disabled>Export</button>
+							<div class="clearfix"></div>
+							<div id="searchNumberResult" style="display:none;">
+								You got <span id="searchNumber"></span> result.
+							</div>
+						</div> -->
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="form_row">
+					<hr>
+					
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">What happens:</label>
+						<div class="clearfix"></div>
+					</div>
+					<div class="content_form_input pull-left">
+						<select class="form_field" name="happens">
+							<option value="Export Data">Export Data</option>
+							<option value="Make Changes">Make Changes</option>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div id="searchHiddenContent" style="display: none">
+					<hr>
+					<div id="searchCampaignAction" class="form_row search_action" style="display:none;">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Action:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_form_input pull-left">
+							<select class="form_field" name="campaign_status">
+								<option value="active">Enable</option>
+								<option value="inactive">Pause</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					
+					<div id="searchAdgroupAction" class="form_row search_action" style="display:none;">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Action:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_form_input pull-left">
+							<select class="form_field" name="adgroup_action_type">
+								<option value="active">Enable</option>
+								<option value="inactive">Pause</option>
+								<option value="increase_cpc">Increase max. CPC Bid by</option>
+								<option value="decrease_cpc">Decrease max. CPC Bid by</option>
+								<option value="set_cpc">Set max. CPC to</option>
+								<option value="find_and_replace">Find and Replace</option>
+							</select>
+							<input type="text" class="form_field form_field_short" name="adgroup_action_value" disabled style="display: none;">
+							<select class="form_field form_field_short" name="adgroup_action_classifier" disabled style="display: none;">
+								<option value="%">%</option>
+								<option value="RMB">RMB</option>
+							</select>
+							<!-- <select class="form_field form_field_short" name="adgroup_find_and_replace" disabled style="display: none; width:160px;">
+								<option value="replace_adgroup_name">Ad Group Name</option>
+							</select> -->
+							<!-- <input type="text" class="form_field form_field_short" name="adgroup_find_and_replace_find" disabled style="display: none;  width:160px;"> -->
+							<!-- <input type="text" class="form_field form_field_short" name="adgroup_find_and_replace_value" disabled style="display: none;  width:160px;"> -->
+						</div>
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="adgroup_find_and_replace_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Edit:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<select class="form_field form_field_short" name="adgroup_find_and_replace" disabled style="display: none; width:200px; margin-top:10px;">
+								<option value="replace_adgroup_name">Ad Group Name</option>
+							</select>
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="adgroup_find_and_replace_find_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Find:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="adgroup_find_and_replace_find" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="adgroup_find_and_replace_value_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Replace With:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="adgroup_find_and_replace_value" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>
+						
+						<div class="clearfix"></div>
+							
+					</div>
+					
+					 
+					<div id="searchAdAction" class="form_row search_action" style="display:none;">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Action:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_form_input pull-left">
+							<select class="form_field" name="ad_action_type">
+								<option value="active">Enable</option>
+								<option value="inactive">Pause</option>
+								<option value="find_and_replace">Find and Replace</option>
+							</select>
+							<!-- <select class="form_field form_field_short" name="ad_find_and_replace" disabled style="display: none; width:160px;">
+								<option value="replace_headline">Headline</option>
+								<option value="replace_desc_1">Description Line 1</option>
+								<option value="replace_desc_2">Description Line 2</option>
+								<option value="replace_display_url">Display URL</option>
+								<option value="replace_mobile_display_url">Mobile Display URL</option>
+								<option value="replace_destination_url">Landing page URL</option>
+								<option value="replace_mobile_destination_url">Mobile Landing Page URL</option>
+							</select> -->
+							<!-- <input type="text" class="form_field form_field_short" name="ad_find_and_replace_find" disabled style="display: none;  width:160px;">
+							<input type="text" class="form_field form_field_short" name="ad_find_and_replace_value" disabled style="display: none;  width:160px;"> -->
+						</div>						
+
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="ad_find_and_replace_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Edit:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<select class="form_field form_field_short" name="ad_find_and_replace" disabled style="display: none; width:200px; margin-top:10px;">
+								<option value="replace_headline">Headline</option>
+								<option value="replace_desc_1">Description Line 1</option>
+								<option value="replace_desc_2">Description Line 2</option>
+								<option value="replace_display_url">Display URL</option>
+								<option value="replace_mobile_display_url">Mobile Display URL</option>
+								<option value="replace_destination_url">Landing page URL</option>
+								<option value="replace_mobile_destination_url">Mobile Landing Page URL</option>
+							</select>
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="ad_find_and_replace_find_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Find:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="ad_find_and_replace_find" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="ad_find_and_replace_value_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Replace With:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="ad_find_and_replace_value" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>	
+						
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					
+					<div id="searchKeywordAction" class="form_row search_action" style="display:none;">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Action:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_form_input pull-left">
+							<select class="form_field" name="keyword_action_type">
+								<option value="active">Enable</option>
+								<option value="inactive">Pause</option>
+								<option value="increase_cpc">Increase max. CPC Bid by</option>
+								<option value="decrease_cpc">Decrease max. CPC Bid by</option>
+								<option value="set_cpc">Set max. CPC to</option>
+								<option value="find_and_replace">Find and Replace</option>
+							</select>
+							<input type="text" class="form_field form_field_short" name="keyword_action_value" disabled style="display: none;">
+							<select class="form_field form_field_short" name="keyword_action_classifier" disabled style="display: none;">
+								<option value="%">%</option>
+								<option value="RMB">RMB</option>
+							</select>
+							<!-- <select class="form_field form_field_short" name="keyword_find_and_replace" disabled style="display: none; width:160px;">
+								<option value="keyword_replace_destination_url">Landing page URL</option>
+								<option value="keyword_replace_mobile_destination_url">Mobile Landing Page URL</option>
+							</select> -->
+							<!-- <input type="text" class="form_field form_field_short" name="keyword_find_and_replace_find" disabled style="display: none;  width:160px;"> -->
+							<!-- <input type="text" class="form_field form_field_short" name="keyword_find_and_replace_value" disabled style="display: none;  width:160px;"> -->
+						</div>
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="keyword_find_and_replace_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Edit:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<select class="form_field form_field_short" name="keyword_find_and_replace" disabled style="display: none; width:200px; margin-top:10px;">
+								<option value="keyword_replace_destination_url">Landing page URL</option>
+								<option value="keyword_replace_mobile_destination_url">Mobile Landing Page URL</option>
+							</select>
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="keyword_find_and_replace_find_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Find:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="keyword_find_and_replace_find" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						<div class="content_form_label pull-left" id="keyword_find_and_replace_value_title" style="display: none; margin-top:10px;">
+							<label class="form_label pull-right">Replace:</label>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="content_form_input pull-left" style="display: none;">
+							<input type="text" class="form_field form_field_short" name="keyword_find_and_replace_value" disabled style="display: none;  width:200px; margin-top:10px;">
+						</div>
+						
+						<div class="clearfix"></div>
+						
+						
+						
+					</div>
+					
+					
+					<!-- <div id="searchOtherAction" class="form_row search_action" style="display:none;">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Action:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_form_input pull-left">
+							<select class="form_field" name="action_type">
+								<option value="active">Active</option>
+								<option value="inactive">Inactive</option>
+								<option value="increase">Increase bid</option>
+								<option value="decrease">Decrease bid</option>
+							</select>
+							<input type="text" class="form_field form_field_short" name="action_value" disabled style="display: none;">
+							<select class="form_field form_field_short" name="action_classifier" disabled style="display: none;">
+								<option value="%">%</option>
+								<option value="RMB">RMB</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+					</div> -->
+	
+					<!-- <div class="form_row">
+						<div class="content_form_label pull-left">
+							<label class="form_label pull-right">Search name:</label>
+							<div class="clearfix"></div>
+						</div>
+						<div class="content_from_input pull-left">
+							<input type="text" class="form_field" name="search_name">
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<hr> -->
+					
+				</div>
+				
+				
+				<div class="form_row">
+					<hr>
+					<div class="content_form_label pull-left">
+						<label class="form_label pull-right">&nbsp;</label>
+					</div>
+					<div class="content_form_input pull-left">
+						<button type="button" id="submit_button" class="button red_button submit_button pull-left enabled" onclick="submitAdvancesearch();" enabled>Submit</button>
+						<button type="button" class="button white_button cancel_button pull-left" onclick="$('#advancesearchForm')[0].reset();">Reset</button>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>

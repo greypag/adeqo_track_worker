@@ -1,0 +1,539 @@
+<div class="content_title">Campaigns</div>
+
+<ul class="tab_menu">
+	<li><a class="tab_tag active">Campaigns</a></li>
+	<!-- <li><a class="tab_tag">Drafts</a></li> -->
+</ul>
+<div class="content_outer content-no-padding">
+	<div class="content_core tab_content">
+		<input type="hidden" id="campaign_type" name="campaign_type" value="sogou"/>
+		<form action="" method="post" id="campaignFilterForm" autocomplete="off">
+			<ul class="nav nav-pills filters-nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/network.png" alt="Network Filter" title="Network Filter">
+						Network Filter <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;">
+							<label for="qihoo_360" class="normal-font-weight">
+								<input type="checkbox" class="account_type" id="qihoo_360" name="channel_array[]" value="360" checked> Qihoo 360
+							</label>
+						</a></li>
+						<!-- <li><a href="javascript:;">
+							<label for="baidu" class="normal-font-weight">
+								<input type="checkbox" id="baidu" name="baidu" value="checked"> Baidu
+							</label>
+						</a></li>
+						<li><a href="javascript:;">
+							<label for="shenma" class="normal-font-weight">
+								<input type="checkbox" id="shenma" name="shenma" value="checked"> Shenma
+							</label>
+						</a></li> -->
+						<li><a href="javascript:;">
+							<label for="sogou" class="normal-font-weight">
+								<input type="checkbox" class="account_type" id="sogou" name="channel_array[]" value="sogou" checked> Sogou
+							</label>
+						</a></li>
+						<li>
+							<a class="no-highlight">
+								<button type="button" class="btn btn-red btn-xs btn-halfwidth" onclick="applyFilter(this, true);">Apply</button>
+								<button type="button" class="btn btn-white btn-xs btn-halfwidth" onclick="applyFilter(this, false);">Cancel</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
+	
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/account.png" alt="Account Filter" title="Account Filter">
+						Account Filter <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						
+						<%
+						@user_network_id_array = []
+				      	@user_network = @db[:network_user].find('user' => session[:user_id].to_i)
+				      
+				      	@user_network.each do |user_network|
+				        	@user_network_id_array << user_network["network_id"]
+				      	end
+				      	
+				      	@current_user_network = @db[:network].find('id' => { "$in" => @user_network_id_array})
+						%>
+						
+						<%
+						if @current_user_network.count.to_i > 0
+				        	@current_user_network.each do |network|
+			            		%>
+			            		<li><a href="javascript:;">
+									<label for="<%=network["type"].to_i%>_<%=network["id"].to_i%>" class="normal-font-weight">
+										<input type="checkbox" class="account_id" id="account_<%=network["id"].to_i.to_s%>" name="account_array[]" value="<%=network["id"].to_i%>" checked> <%=network["name"].to_s%>
+									</label>
+								</a></li>
+			            		<%
+				            end
+				        end	
+						%>
+						<!-- <li><a href="javascript:;">
+							<label for="qihoo_360" class="normal-font-weight">
+								<input type="checkbox" id="qihoo_360" name="account_array[]" value="360" checked> Qihoo 360
+							</label>
+						</a></li> -->
+						<li>
+							<a class="no-highlight">
+								<label for="all" class="normal-font-weight">
+									<input type="checkbox" id="all" checked onchange="selectAllFilterAccountOption(this);"> All
+								</label>
+								<button type="button" class="btn btn-red btn-xs" onclick="applyFilter(this, true);">Apply</button>
+								<button type="button" class="btn btn-white btn-xs" onclick="applyFilter(this, false);">Cancel</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
+	
+				<!-- <li class="dropdown" id="custom-view-dropdown">
+					<a data-toggle="modal" data-target="#import-modal" role="button">
+						<img src="/images/icon/add-black.png" alt="Create Campaign" title="Create Campaign">
+						Create Campaign <span class="caret"></span>
+					</a>
+				</li> -->
+	
+				<!-- <li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/edit-black.png" alt="Add" title="Add">
+						Add <span class="caret"></span>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:;" onclick="showUploadContentOuter();">Upload Spreadsheet</a></li>
+						</ul>
+					</a>
+				</li> -->
+				
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/edit-black.png" alt="Edit" title="Edit">
+						Edit <span class="caret"></span>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:;" onclick="editStatus('active');">Enable</a></li>
+							<li><a href="javascript:;" onclick="editStatus('inactive');">Pause</a></li>
+							<!-- <li><a href="javascript:;" onclick="editStatus('remove');">Remove</a></li> -->
+							<!-- <li role="separator" class="divider"></li> -->
+							<!--<li><a href="javascript:;" onclick="showEditUploadContentOuter();">Upload Spreadsheet</a></li>-->
+							<!-- <li><a href="javascript:;" onclick="">Upload Spreadsheet</a></li> -->
+						</ul>
+					</a>
+				</li>
+	
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="submitExportData();">
+						<img src="/images/icon/export.png" alt="Export" title="Export">
+						Export
+					</a>
+				</li>
+	
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="showRulesContentOuter();">
+						<img src="/images/icon/adv-filter.png" alt="Advanced Filter" title="Advanced Filter">
+						Advanced Filter <span class="caret"></span>
+					</a>
+					<!-- <ul class="dropdown-menu advanced-filter-dropdown">
+						<li><a href="javascript:;" onclick="showRulesContentOuter();applyFilter(this);">Create filter</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a class="no-highlight" href="javascript:;"><i class="info-text">Apply saved filter</i></a></li>
+						<li><a href="javascript:;">filter 1<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+						<li><a href="javascript:;">filter 2<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+						<li><a href="javascript:;">filter 3<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+					</ul> -->
+				</li>
+	
+				<li class="dropdown" id="custom-view-dropdown">
+					<a href="/clickactivity/company/<%=@user_company_id.to_s%>">
+						<img src="/images/icon/click-icon.png" alt="Click Activity" title="Click Activity">
+						Click Activity
+					</a>
+				</li>
+	
+				<!-- <li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/sync.png" alt="Sync" title="Sync">
+						Sync
+					</a>
+				</li> -->
+	
+				<li class="pull-right">
+					<a onclick="$('#date-range-dropdown .dropdown-toggle').dropdown('toggle');" href="javascript:;">
+						<span class="caret"></span>
+						<img src="/images/icon/calendar.png" alt="Calendar" title="Calendar">
+					</a>
+				</li>
+				<li id="date-range-dropdown" class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<div class="text-right date-range">
+						</div>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="text-center" onclick="setDate('Yesterday');applyFilter(this);"><a href="javascript:;">Yesterday</a></li>
+						<li class="text-center" onclick="setDate('Last 7 days');applyFilter(this);"><a href="javascript:;">Last 7 days</a></li>
+						<li class="text-center" onclick="setDate('Last 30 days');applyFilter(this);"><a href="javascript:;">Last 30 days</a></li>
+						<li class="text-center" onclick="setDate('This Week');applyFilter(this);"><a href="javascript:;">This Week</a></li>
+						<li class="text-center" onclick="setDate('Last Week');applyFilter(this);"><a href="javascript:;">Last Week</a></li>
+						<li class="text-center" onclick="setDate('This Month');applyFilter(this);"><a href="javascript:;">This Month</a></li>
+						<li class="text-center" onclick="setDate('Last Month');applyFilter(this);"><a href="javascript:;">Last Month</a></li>
+						<li class="text-center" onclick="setDate('Last 3 Months');applyFilter(this);"><a href="javascript:;">Last 3 Months</a></li>
+						<li class="text-center"><a class="no-highlight">Select Dates:</a></li>
+						<li class="text-center">
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="start_date" name="start_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+							to
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="end_date" name="end_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+						</li>
+						<li class="text-center">
+							<a class="no-highlight">
+								<button type="button" class="btn btn-red btn-xs btn-fullwidth" onclick="applyFilter(this, true);">Apply</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+
+<div id="rules-content-outer" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form">
+			<form action="" method="post" id="filterForm" autocomplete="off">
+				<div id="rules-content">
+					<div class="form_row filter_row">
+						<div class="pull-left">
+							<select name="field_name" class="form_field" onchange="selectRuleField(this);">
+								<option value="status">Status</option>
+								<option value="campaign_name">Campaign</option>
+								<option value="account_name">Account Name</option>
+								<option value="currency">Currency</option>
+								<option value="impr">Impr.</option>
+								<option value="clicks">Clicks</option>
+								<option value="cost">Cost</option>
+								<option value="avg_cpc">Avg. CPC</option>
+								<option value="ctr">CTR</option>
+								<option value="conv">Conversion</option>
+								<option value="conv_rate">Conv. Rate</option>
+								<option value="cpa">CPA</option>
+								<option value="revenue">Revenue</option>
+								<option value="profit">Profit</option>
+								<option value="avg_pos">Avg. Pos.</option>
+								<option value="rpa">RPA</option>
+								<option value="roas">ROAS</option>
+							</select>
+						</div>
+	
+						<div class="field_container pull-left">
+							<input type="hidden" name="field_rule" class="form_field" value="="/>
+							
+							<select name="field_value" class="form_field">
+								<option value="Active">Active</option>
+								<option value="Inactive">Inactive</option>
+							</select>
+						</div>
+						<span class="remove_icon" onclick="removeRule(this)"></span>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="form_row">
+					Add rules<span class="add_icon" onclick="addRule()"></span>
+				</div>
+
+				<hr>
+				<div class="form_row">
+					<button type="button" class="button red_button submit_button" onclick="getCampaignData();">Apply</button>
+					<button type="button" class="button white_button cancel_button" onclick="resetRule();">Reset</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideRulesContentOuter();">Close</button>
+					<!-- <div class="form-group pull-right">
+						<label><input type="checkbox"> Save filter</label>
+						<input type="text" class="form_field" placeholder="Enter filter name">
+					</div> -->
+				</div>
+			</form>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div id="upload-content-outer" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form">
+			<form action="/bulkaddcampaign" method="post" id="uploadForm" enctype="multipart/form-data" autocomplete="off" target="hiddenUploadIframe">
+				<div class="form_row">
+					<strong>Upload spreadsheets add</strong>
+				</div>
+				<div class="form_row">
+					Upload a spreadsheets to add your campaign (.xlsx format)<br />P.S It takes approximately 0.4 second to upload one row data.
+				</div>
+				<div class="form_row upload-row">
+					<input type="hidden" name="type" />
+					<input type="file" name="file"/>
+					<span id="upload_error" class="error_message"></span>
+				</div>
+				<div class="form_row">&nbsp;</div>
+				<div class="form_row">
+					<button type="button" class="button white_button submit_button" onclick="submitUpload('apply');">Upload & Apply</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideUploadContentOuter();">Cancel</button>
+				</div>
+				<div class="form_row">
+					Download a template <a href="/csv_template/Campaign_Upload_Template.xlsx">here</a>
+				</div>
+			</form>
+			
+			<iframe id="hiddenUploadIframe" name="hiddenUploadIframe" height="0" width="0" frameborder="0" scrolling="yes"></iframe>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div id="upload-content-outer-edit" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form">
+			<form action="/bulkeditcampaign" method="post" id="uploadeditForm" enctype="multipart/form-data" autocomplete="off" target="hiddenEditUploadIframe">
+				<div class="form_row">
+					<strong>Upload spreadsheets edit</strong>
+				</div>
+				<div class="form_row">
+					Please make sure you export the current data before edit (.xlsx format)<br />
+					P.S Use Advance Filter to filter out unnecessary data before you export will make the edit process a lot Faster. 
+				</div>
+				
+				<div class="form_row">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="submitEditExportData();">
+						<img src="/images/icon/export.png" alt="Export" title="Export" width="30">
+						Export
+					</a>
+				</div>
+					
+				<div class="form_row upload-row">
+					<input type="hidden" name="edit_type" />
+					<input type="file" name="edit_file"/>
+					<span id="upload_edit_error" class="error_message"></span>
+				</div>
+				<div class="form_row">&nbsp;</div>
+				<div class="form_row">
+					<button type="button" class="button white_button submit_button" onclick="submitEditUpload('apply');">Upload & Apply</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideEditUploadContentOuter();">Cancel</button>
+				</div>
+				<!-- <div class="form_row">
+					Download a template <a href="/csv_template/Campaign_Upload_Template.xlsx">here</a>
+				</div> -->
+			</form>
+			
+			<iframe id="hiddenEditUploadIframe" name="hiddenEditUploadIframe" height="0" width="0" frameborder="0" scrolling="yes"></iframe>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div style="display: none;">
+	<form action="" method="post" id="editStatusForm" autocomplete="off">
+		<div id="edit_hidden_checkbox" class="hidden"></div>
+		<input type="text" name="status"/>
+	</form>
+</div>
+
+<table id="campaigns-table" class="table table-condensed">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th class="text-left">
+				<div class="checkbox">
+					<label>
+						<input id="select_all" type="checkbox" onchange="selectAll(this);"> Status
+					</label>
+				</div>
+			</th>
+			<th>Campaign</th>
+			<!-- <th class="dropdown">Campaign
+				<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-filter"></i></a>
+				<ul class="dropdown-menu">
+					<li><a class="no-highlight">
+						<select name="type1">
+							<option value="=">is equal to</option>
+							<option value="!=">is not equal to</option>
+							<option value="*=">starts with</option>
+							<option value="**">contains</option>
+							<option value="!**">does not contain</option>
+							<option value="^=">ends with</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<input type="text" name="value1">
+					</a></li>
+					<li><a class="no-highlight">
+						<select class="btn-halfwidth" name="ao">
+							<option value="&">and</option>
+							<option value="|">or</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<select name="type2">
+							<option value="=">is equal to</option>
+							<option value="!=">is not equal to</option>
+							<option value="*=">starts with</option>
+							<option value="**">contains</option>
+							<option value="!**">does not contain</option>
+							<option value="^=">ends with</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<input type="text" name="value2">
+					</a></li>
+					<li><a class="no-highlight">
+						<button class="btn btn-red btn-xs btn-halfwidth" onclick="applyDTFilter(this, true);">Apply</button>
+						<button class="btn btn-white btn-xs btn-halfwidth" onclick="applyDTFilter(this, false);">Cancel</button>
+					</a></li>
+				</ul>
+				<input type="text" class="filterText">
+			</th> -->
+			<th>Link</th>
+			<th>Channel</th>
+			<th>Account Name</th>
+			<!-- <th class="dropdown">Account Name
+				<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-filter"></i></a>
+				<ul class="dropdown-menu">
+					<li><a class="no-highlight">
+						<select name="type1">
+							<option value="=">is equal to</option>
+							<option value="!=">is not equal to</option>
+							<option value="*=">starts with</option>
+							<option value="**">contains</option>
+							<option value="!**">does not contain</option>
+							<option value="^=">ends with</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<input type="text" name="value1">
+					</a></li>
+					<li><a class="no-highlight">
+						<select class="btn-halfwidth" name="ao">
+							<option value="&">and</option>
+							<option value="|">or</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<select name="type2">
+							<option value="=">is equal to</option>
+							<option value="!=">is not equal to</option>
+							<option value="*=">starts with</option>
+							<option value="**">contains</option>
+							<option value="!**">does not contain</option>
+							<option value="^=">ends with</option>
+						</select>
+					</a></li>
+					<li><a class="no-highlight">
+						<input type="text" name="value2">
+					</a></li>
+					<li><a class="no-highlight">
+						<button class="btn btn-red btn-xs btn-halfwidth" onclick="applyDTFilter(this, true);">Apply</button>
+						<button class="btn btn-white btn-xs btn-halfwidth" onclick="applyDTFilter(this, false);">Cancel</button>
+					</a></li>
+				</ul>
+				<input type="text" class="filterText">
+			</th> -->
+			<th>Currency</th>
+			<th>Impr.</th>
+			<th>Clicks</th>
+			<th>Cost</th>
+			<th>Avg. CPC</th>
+			<th>CTR</th>
+			<th>Conversion</th>
+			<th>Conv. Rate</th>
+			<th>CPA</th>
+			<th>Revenue</th>
+			<th>Profit</th>
+			<th>Avg. Pos.</th>
+			<th>RPA</th>
+			<th>ROAS</th>
+			<th>network_id</th>
+		</tr>
+	</thead>
+	<tbody class="text-right">
+	</tbody>
+	
+	
+	<tfoot>
+        <tr>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-left" style="padding-left:22px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+        </tr>
+    </tfoot>
+	
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="import-modal" tabindex="-1" role="dialog" aria-labelledby="add_user_modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<!-- <div class="modal_title">Clicking "Import" will import the data for the selected campaigns from the channel accounts</div> -->
+					<div class="modal_title">"Create Campaign" function is currently not available.</div>
+					<hr/>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="button red_button submit_button pull-right">Import</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="button white_button cancel_button pull-left" onclick="$('#import-modal').modal('hide');">Cancel</div>
+						</div> -->
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+							<div class="button white_button cancel_button pull-left" onclick="$('#import-modal').modal('hide');">Ok, I'll try later</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<% if !@id_pre_select.nil? %>
+		<% 
+		@id_pre_select_network = @db[:network].find('id' => @id_pre_select.to_i).limit(1)
+		%>
+		
+		<script>
+			$(".account_id").prop( "checked", false );
+			$("#all").prop( "checked", false );
+			$("#account_"+<%=@id_pre_select.to_s%>).prop( "checked", true );
+		</script>
+<% end %>

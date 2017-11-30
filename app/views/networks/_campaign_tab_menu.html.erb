@@ -1,0 +1,139 @@
+<%
+@status = "Active"
+
+if @type.to_s == 'sogou'
+	@campaign.each do |campaign|
+		@title = campaign["campaign_name"]
+		@budget = campaign["budget"]
+		# @budget = @budget / 30
+	                                      
+		if campaign["pause"].to_s == 'true'  
+			@status = "Inactive"
+		end
+	end
+end
+
+if @type.to_s == '360' || @type.to_s == 'threesixty'
+	@campaign.each do |campaign|
+		@title = campaign["campaign_name"]
+		@budget = campaign["budget"]
+		# @budget = @budget / 30
+	                                      
+		if campaign["status"].to_s == '暂停'  
+			@status = "Inactive"
+		end
+	end
+end
+%>
+
+<ol class="breadcrumb">
+	<!-- <li><a href="/campaigns">Campaigns</a></li> -->
+	<li><a href="/channel/<%=@network_id%>/campaigns"><%=@network_name%></a></li>
+	
+	<% if @adgroup_id.to_i <= 0 %>
+			<li class="active"><strong><i><%=@title.to_s%></i></strong></li>
+	<% else %>
+			<%
+				@adgroup_name = ""
+				@adgroup_status = "Active"
+				@db_type = @type.to_s
+				
+				if @type.to_s == "threesixty"
+					@db_type = "360"
+				end
+				
+				db_name = "adgroup_" + @db_type.to_s + "_" + @network_id.to_s
+				 
+				if @type.to_s == 'sogou'
+				 
+					@adgroup = @db[db_name].find('cpc_grp_id' => @adgroup_id.to_i)
+	          		@db.close
+	          		
+	          		if @adgroup.count.to_i > 0
+			            @adgroup.each do |adgroup_d|
+			            	@adgroup_name = adgroup_d['name']
+			            	@adgroup_status = adgroup_d['status']
+			            end
+		           	end
+          		
+          		elsif @type.to_s == 'threesixty'
+          			
+          			@adgroup = @db[db_name].find('adgroup_id' => @adgroup_id.to_i)
+	          		@db.close
+	          		
+	          		if @adgroup.count.to_i > 0
+			            @adgroup.each do |adgroup_d|
+			            	@adgroup_name = adgroup_d['adgroup_name']
+			            	@adgroup_status = adgroup_d['status']
+			            end
+		           	end
+	          		
+          		end
+			%>
+			
+			<li class="active"><a href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/adgroup"><%=@title.to_s%></a></li>
+			<li class="active"><strong><i><%=@adgroup_name.to_s%></i></strong></li>
+	<% end %>
+</ol>
+<% if @adgroup_id.to_i <= 0 %>
+		<div class="content_title under_breadcrumb"><%=@title.to_s%></div>
+<% else %>
+		<div class="content_title under_breadcrumb"><%=@adgroup_name.to_s%></div>
+<% end %>
+
+<div class="status_container">
+	<% if @adgroup_id.to_i <= 0 %>
+		<div class="pull-left">Campaign Status: <%=@status.to_s%> <span class="status_point <%=@status.to_s.downcase%>"> </span></div>
+		<div class="budget_container pull-left">Campaign Daily Budget: <span class="red_text"><%=@budget%> <%=@currency.to_s.upcase%></span></div>
+	<% else %>
+		<% 
+		if @adgroup_status.to_s == "21" || @adgroup_status.to_s == "启用"
+			@adgroup_status = "Active"
+		else
+			@adgroup_status = "Inactive" 
+		end 
+		%>
+		<div class="pull-left">Adgroup Status: <%=@adgroup_status.to_s%> <span class="status_point <%=@adgroup_status.to_s.downcase%>"> </span></div>
+	<% end %>
+	<div class="clearfix"></div>
+</div>
+
+
+<ul class="tab_menu">
+	<% if @adgroup_id.to_i <= 0 %>
+			<li><a class="tab_tag overview_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/overview">Overview</a></li>
+			<li><a class="tab_tag setting_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/setting">Settings</a></li>
+			<li><a class="tab_tag adgroups_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/adgroup">Ad Groups</a></li>
+	<% end %>
+	
+	<% if @adgroup_id.to_i > 0 %>
+			<li><a class="tab_tag ads_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/adgroup/<%=@adgroup_id%>/ads">Ads</a></li>
+			<li><a class="tab_tag keywords_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/adgroup/<%=@adgroup_id%>/keyword">Keywords</a></li>
+	<% else %>
+			<li><a class="tab_tag ads_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/ads">Ads</a></li>
+			<li><a class="tab_tag keywords_tag" href="/campaigns/<%=@id%>/<%=@type%>/<%=@network_id%>/keyword">Keywords</a></li>
+	<% end %>
+</ul>
+
+<script>
+	if(/\/campaigns\/\w*\/\w*\/\w*\/overview/i.test(window.location.href)){
+		$(".overview_tag").addClass("active");
+	}
+	else if(/\/campaigns\/\w*\/\w*\/\w*\/setting/i.test(window.location.href)){
+		$(".setting_tag").addClass("active");
+	}
+	else if(/\/campaigns\/\w*\/\w*\/\w*\/adgroup/i.test(window.location.href)){
+		if(/keyword/i.test(window.location.href)){
+			$(".keywords_tag").addClass("active");
+		}else if(/ads/i.test(window.location.href)){
+			$(".ads_tag").addClass("active");
+		}else{
+			$(".adgroups_tag").addClass("active");
+		}
+	}
+	else if(/\/campaigns\/\w*\/\w*\/\w*\/ads/i.test(window.location.href)){
+		$(".ads_tag").addClass("active");
+	}else if (/\/campaigns\/\w*\/\w*\/\w*\/keyword/i.test(window.location.href)){
+		$(".keywords_tag").addClass("active");
+	}
+</script>

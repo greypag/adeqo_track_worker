@@ -1,0 +1,168 @@
+<%= render partial: "campaign_tab_menu.html.erb" %>
+ 
+      
+
+<div class="content_outer content-no-padding">
+	<div class="content_core">
+		<div class="content_core tab_content">
+			<form action="" method="post" id="campaignOverviewFilterForm" autocomplete="off">
+				
+				<input type="hidden" id="campaign_type" name="campaign_type" value="<%=@type.to_s%>"/>
+				<input type="hidden" id="campaign_id" name="campaign_id" value="<%=@id.to_i%>"/>
+				<input type="hidden" id="network_id" name="network_id" value="<%=@network_id%>"/>
+				
+				<ul class="nav nav-pills filters-nav">
+					<!-- <li class="dropdown" id="custom-view-dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+							<img src="/images/icon/add-black.png" alt="Networks" title="Networks">
+							Create Ad Group
+						</a>
+					</li>
+	
+					<li class="dropdown" id="custom-view-dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+							<img src="/images/icon/add-black.png" alt="Networks" title="Networks">
+							Create Ad
+						</a>
+					</li> -->
+	
+					<li class="dropdown" id="custom-view-dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="submitExportData();">
+							<img src="/images/icon/export.png" alt="Export" title="Export">
+							Export
+						</a>
+					</li>
+	
+					<li class="dropdown" id="custom-view-dropdown">
+						<a href="/clickactivity/campaign/<%=@id%>">
+							<img src="/images/icon/click-icon.png" alt="Networks" title="Networks">
+							Click Activity
+						</a>
+					</li>
+	
+	
+					<li class="pull-right">
+						<a onclick="$('#date-range-dropdown .dropdown-toggle').dropdown('toggle');" href="javascript:;">
+							<span class="caret"></span>
+							<img src="/images/icon/calendar.png" alt="Networks" title="Networks">
+						</a>
+					</li>
+					<li id="date-range-dropdown" class="dropdown pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+							<div class="text-right date-range">
+								Last 7 days<br>
+								10 June 2015 - 16 June 2015
+							</div>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="text-center" onclick="setDate('Yesterday');applyFilter(this);"><a href="javascript:;">Yesterday</a></li>
+							<li class="text-center" onclick="setDate('Last 7 days');applyFilter(this);"><a href="javascript:;">Last 7 days</a></li>
+							<li class="text-center" onclick="setDate('Last 30 days');applyFilter(this);"><a href="javascript:;">Last 30 days</a></li>
+							<li class="text-center" onclick="setDate('This Week');applyFilter(this);"><a href="javascript:;">This Week</a></li>
+							<li class="text-center" onclick="setDate('Last Week');applyFilter(this);"><a href="javascript:;">Last Week</a></li>
+							<li class="text-center" onclick="setDate('This Month');applyFilter(this);"><a href="javascript:;">This Month</a></li>
+							<li class="text-center" onclick="setDate('Last Month');applyFilter(this);"><a href="javascript:;">Last Month</a></li>
+							<li class="text-center" onclick="setDate('Last 3 Months');applyFilter(this);"><a href="javascript:;">Last 3 Months</a></li>
+							<li class="text-center"><a class="no-highlight">Select Dates:</a></li>
+							<li class="text-center">
+								<a class="no-highlight">
+									<div class="datepicker-container">
+										<input type="text" id="start_date" name="start_date" class="datepicker-field">
+										<span class="caret input-caret"></span>
+									</div>
+								</a>
+								to
+								<a class="no-highlight">
+									<div class="datepicker-container">
+										<input type="text" id="end_date" name="end_date" class="datepicker-field">
+										<span class="caret input-caret"></span>
+									</div>
+								</a>
+							</li>
+							<li class="text-center">
+								<a class="no-highlight" href="javascript:;">
+									<button type="button" class="btn btn-red btn-xs btn-fullwidth" onclick="applyFilter(this, true);">Apply</button>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="line-chart-container">
+	<div class="line-chart-legend-container">
+		<span class="line-chart-legend line-chart-legend-1"></span>
+		<span class="line-chart-dropdown-container">
+			<select id="line-chart-dropdown-1" class="chosen-select" onchange="genLineChart(this.value, $('#line-chart-dropdown-2').val());">
+				<option value="">None</option>
+				<option value="impression" selected>Impr.</option>
+				<option value="clicks">Clicks</option>
+				<option value="pub_cost">Pub. Cost</option>
+				<option value="avg_cpc">Avg. CPC</option>
+				<option value="ctr">CTR</option>
+				<option value="conversion">Conversions</option>
+				<option value="conversion_rate">Conv. Rate</option>
+				<option value="cpa">CPA</option>
+				<option value="revenue">Revenue</option>
+			</select>
+		</span>
+
+		<span class="line-chart-legend line-chart-legend-2"></span>
+		<span class="line-chart-dropdown-container">
+			<select id="line-chart-dropdown-2" class="chosen-select" onchange="genLineChart($('#line-chart-dropdown-1').val(), this.value);">
+				<option value="">None</option>
+				<option value="impression">Impr.</option>
+				<option value="clicks" selected>Clicks</option>
+				<option value="pub_cost">Pub. Cost</option>
+				<option value="avg_cpc">Avg. CPC</option>
+				<option value="ctr">CTR</option>
+				<option value="conversion">Conversions</option>
+				<option value="conversion_rate">Conv. Rate</option>
+				<option value="cpa">CPA</option>
+				<option value="revenue">Revenue</option>
+			</select>
+		</span>
+	</div>
+
+	<canvas id="line-chart"></canvas>
+</div>
+
+<div id="campaign-overview-table-container">
+	<table id="campaign-overview-table" class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Impr.</th>
+				<th>Clicks</th>
+				<th>Pub. Cost</th>
+				<th>Avg. CPC</th>
+				<th>CTR</th>
+				<th>Conversions</th>
+				<th>Conv. Rate</th>
+				<th>CPA</th>
+				<th>Revenue</th>
+			</tr>
+		</thead>
+		<tbody class="text-right">
+			
+		</tbody>
+		
+		<tfoot>
+	        <tr>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	            <th class="text-right" style="padding-right:18px;"></th>
+	        </tr>
+	    </tfoot>
+	</table>
+</div>

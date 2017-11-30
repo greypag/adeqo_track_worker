@@ -1,0 +1,513 @@
+@charset "UTF-8";
+body{
+	margin:0;
+	padding:0;
+}
+.adeqo-container {
+	font-family: 'Average Sans',calibri, arial, "微软雅黑", sans-serif !important;
+}
+.adeqo-container .h1,.adeqo-container .h2,.adeqo-container .h3, .adeqo-container h1, .adeqo-container h2, .adeqo-container h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.adeqo-container input#contact_name,
+.adeqo-container input#contact_email,
+.adeqo-container input#contact_subject,
+.adeqo-container textarea#contact_message {
+	border-radius: 7px;
+}
+.adeqo-container .btn.btn-default.black-border {
+	border: 1px solid #000000;
+}
+.adeqo-container .btn.btn-default.black-border:hover{
+	border: 1px solid #ed2124;
+	background-color: #ed2124;
+	color: #fff;
+}
+.adeqo-container .contact-us-left-col {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.adeqo-container .head-title {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.adeqo-container .block-container, .adeqo-container .login-fig-container {
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+.adeqo-container .arrow {
+	text-align: center;
+	line-height: 21px;
+	padding-bottom: 7px;
+	text-transform: uppercase;
+	border-bottom: 2px solid #000000;
+	position: relative;
+}
+.adeqo-container .line1 {
+	background: transparent center no-repeat;
+	background-size: cover;
+	background-image: url('../../images/home/line1.png');
+	height: 17px;
+	width: 140px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.adeqo-container .line2 {
+	background: transparent center no-repeat;
+	background-size: cover;
+	background-image: url('../../images/home/line2.png');
+	height: 18px;
+	width: 280px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.adeqo-container .arrow:before {
+	content: '\25bc';
+	position: absolute;
+	top: 100%;
+	left: auto;
+	right: auto;
+	color: #000000;
+}
+
+.adeqo-container .margin-top-20 {
+	margin-top: 20px;
+}
+
+.adeqo-container .horizontal-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.adeqo-container .bottom-btn {
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+
+.adeqo-container .send-yr-msg {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+
+.adeqo-container .page-header{
+	border: none;
+}
+.adeqo-container .navbar.navbar-default.navbar-fixed-top {
+	background-color: transparent;
+	border: none;
+	-webkit-transition: .2s background;
+	-moz-transition: .2s background;
+	-o-transition: .2s background;
+	-ms-transition: .2s background;
+	transition: .2s background;
+}
+.adeqo-container .navbar.navbar-default.navbar-fixed-top.scrolled {
+	background-color: rgba(255,255,255,.8);
+	-webkit-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+	-moz-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+	-o-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+	-ms-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+	box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+
+	-webkit-transition: .2s background;
+	-moz-transition: .2s background;
+	-o-transition: .2s background;
+	-ms-transition: .2s background;
+	transition: .2s background;
+}
+.adeqo-container .navbar-right{
+	margin-right: 15px;
+}
+.adeqo-container .navbar{
+	margin-bottom: 0;
+}
+.adeqo-container .navbar-brand {
+	height: auto;
+}
+.adeqo-container .nav>li {
+	padding: 40px 32px;
+}
+.adeqo-container .navbar-default .navbar-toggle:focus,
+.adeqo-container .navbar-default .navbar-toggle:hover,
+.adeqo-container .navbar-default .navbar-nav>.active>a,
+.adeqo-container .navbar-default .navbar-nav>.active>a:focus,
+.adeqo-container .navbar-default .navbar-nav>.active>a:hover{
+	background-color: transparent;
+	color:#000;
+}
+.adeqo-container .navbar-default .navbar-nav>.active>a,
+.adeqo-container .navbar-default .navbar-nav>.active>a:focus,
+.adeqo-container .navbar-default .navbar-nav>.active>a:hover{
+	border-top: #ed2124 solid 2px;
+	border-bottom: transparent solid 2px;
+	color:#000;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 0 0 0;
+}
+.adeqo-container .navbar-default .navbar-nav>.active>a:focus
+.adeqo-container .navbar-default .navbar-nav>.active>a:hover{
+	border-top: #ed2124 solid 2px;
+	border-bottom: transparent solid 2px;
+	color:#000;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 0 0 0;
+}
+.adeqo-container .navbar-default .navbar-nav>*>a{
+	border-top: transparent solid 2px;
+	border-bottom: transparent solid 2px;
+	color:#000;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 4px 0 0 0;
+}
+.adeqo-container .navbar-default .navbar-nav>*>a:focus,
+.adeqo-container .navbar-default .navbar-nav>*>a:hover{
+	border-top: #ed2124 solid 2px;
+	border-bottom: transparent solid 2px;
+	color:#000;
+}
+.adeqo-container .navbar-default .navbar-toggle{
+	border: none;
+	margin: 0;
+}
+.adeqo-container .navbar-default .navbar-toggle .icon-bar{
+	background-color: #000;
+}
+.modal-open .adeqo-container .navbar{
+	margin-right: 17px;
+}
+.modal-open .adeqo-container .login-box-top-container {
+	margin-right: 15px;
+}
+.adeqo-container.page-contact-us .banner,
+.adeqo-container.page-login .banner,
+.adeqo-container.page-personal-demo .banner{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 0 auto 0;
+	height: 980px;
+	width: 100%;
+}
+.adeqo-container.page-contact-us .banner {
+	background-image: url('../../images/home/contact-banner.jpg');
+}
+.adeqo-container.page-login .banner {
+	background-image: url('../../images/home/top-banner.jpg');
+}
+.adeqo-container.page-personal-demo .banner {
+	background-image: url('../../images/home/demo-banner.jpg');
+}
+
+.adeqo-container #map {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+.adeqo-container.page-login .navbar-default .navbar-nav>.active>a,
+.adeqo-container.page-login .navbar-default .navbar-nav>*>a{
+	color: #fff;
+}
+.adeqo-container.page-login .navbar-default .navbar-nav>.active>a,
+.adeqo-container.page-login .navbar-default .navbar-nav>*>a{
+	color: #fff;
+}
+.adeqo-container.page-login .login-box-top-container {
+	margin: 0 auto 0 500px;
+	color: #fff;
+}
+.adeqo-container.page-login .login-box-top-container h2 {
+	font-size: 42px;
+	padding-top: 400px;
+	text-transform: uppercase;
+}
+.adeqo-container .footer-container,
+.adeqo-container .footer-container a{
+	background-color: #000;
+	color: #fff;
+	text-decoration: none;
+}
+.adeqo-container .footer-container a:hover{
+	background-color: #000;
+	color: #ed2124;
+	text-decoration: none;
+}
+.adeqo-container .footer-container p{
+	margin: 8px 0;
+}
+.adeqo-container .login-row-1,
+.adeqo-container .login-row-3{
+	background-color: #ededed;
+}
+.adeqo-container .login-row-1,
+.adeqo-container .login-row-2,
+.adeqo-container .login-row-3{
+	padding: 100px 0 80px;
+}
+.adeqo-container .login-row-4{
+	padding: 60px 0;
+}
+.adeqo-container .login-row-1 .img-responsive,
+.adeqo-container .login-row-2 .img-responsive,
+.adeqo-container .login-row-3 .img-responsive {
+	max-width: 80%;
+}
+.adeqo-container .login-row-2 .img-responsive {
+	height: 94px;
+}
+.adeqo-container .login-row-1 .login-heading{
+	font-size: 21px;
+	line-height: 1.3;
+}
+.adeqo-container .login-row-1 .login-heading{
+	padding: 0 0 80px;
+}
+.adeqo-container .login-row-4{
+	background-color: #333;
+	color: #fff;
+}
+.adeqo-container .login-row-4 .login-box-container{
+	margin: 0px 0;
+}
+.adeqo-container .login-heading{
+	font-size: 14px;
+}
+.adeqo-container .login-box-container{
+	text-align: center;;
+}
+.adeqo-container .login-btn-container {
+	background-color: #fff;
+	display: inline-block;
+	padding: 8px;
+	text-align: center;
+}
+.adeqo-container .login-btn-container{
+	display: inline-block;
+}
+.adeqo-container .login-row-4 h2 {
+	font-size: 24px;
+	margin-bottom: 40px;
+}
+.adeqo-container .btn{
+	border: 1px solid #ed2124;
+	border-radius:0;
+	min-width: 160px;
+}
+.adeqo-container .login-btn-container .btn:first-child {
+	margin: 0 10px 0 0;
+}
+.adeqo-container .btn-red{
+	background-color: #ed2124;
+	color: #fff;
+}
+.adeqo-container .btn-red:hover{
+	zoom: 1;
+	filter: alpha(opacity=66);
+	opacity: 0.66;
+}
+.adeqo-container .btn-white{
+	background-color: #fff;
+	color: #ed2124;
+}
+.adeqo-container .btn-white:hover{
+	background-color: #ed2124;
+	color: #fff;
+}
+.adeqo-container.page-contact-us h1 {
+	color: #000;
+	margin: 0 auto;
+	text-transform: uppercase;
+	text-align: center;
+	padding-top: 25%;
+	font-size: 56px;
+}
+.adeqo-container.page-personal-demo h1 {
+	color: #fff;
+	margin: 0 auto;
+	text-transform: uppercase;
+	text-align: center;
+	padding-top: 25%;
+	font-size: 56px;
+}
+.adeqo-container .scrolled.navbar-default .navbar-nav>*>a {
+	color: #000 !important;
+	-webkit-transition: .2s color;
+	-moz-transition: .2s color;
+	-o-transition: .2s color;
+	-ms-transition: .2s color;
+	transition: .2s color;
+}
+.adeqo-container .navbar-default {
+	background-color: transparent;
+}
+.adeqo-container  #dim{ position:absolute; top:0; left:0; width:100%; z-index:100; background-color: rgba(0,0,0,.6); display:none; text-align:left; }
+.adeqo-container.page-login .login-row-2 h3{text-transform: uppercase;    margin-top: 1em;}
+.adeqo-container.page-contact-us h2{text-transform: uppercase; margin-bottom: .5em; }
+.adeqo-container.page-contact-us h2 span{border-bottom: #ed2124 solid 2px;}
+.adeqo-container.page-contact-us .block-container{margin-bottom: 3em; }
+
+.adeqo-container .content {
+	padding: 60px 0;
+}
+
+
+.adeqo-container .btn-default.focus, .adeqo-container .btn-default:focus{
+	background-color:#fff;
+}
+
+
+.adeqo-container #collapseMap {
+	margin-top: 1em;
+}
+/*responsive*/
+
+@media (max-width:1199px){
+
+	.adeqo-container.page-contact-us .banner, .adeqo-container.page-login .banner {
+		background-position-x: 30%;
+	}
+
+}
+
+@media (max-width:991px){
+	.adeqo-container.page-login .login-box-top-container{
+		margin:0 auto 0 300px;
+		padding-top:100px;
+	}
+	.adeqo-container.page-contact-us .banner, .adeqo-container.page-login .banner {
+		background-position-x: 30%;
+	}
+	.adeqo-container.page-contact-us h1,
+	.adeqo-container.page-personal-demo h1{
+		padding-top: 55%;
+		font-size:80px;
+	}
+}
+
+@media (max-width:767px) {
+	.adeqo-container.page-contact-us .banner {
+		background-image: url('../../images/home/contact-banner-m.jpg');
+	}
+	.adeqo-container.page-login .banner {
+		background-image: url('../../images/home/top-banner-m.jpg');
+	}
+	.adeqo-container.page-personal-demo .banner {
+		background-image: url('../../images/home/demo-banner-m.jpg');
+	}
+
+	.adeqo-container.page-login .login-box-top-container{
+		margin:0 auto 0 300px;
+		padding-top:100px;
+		color:#000;
+	}
+	.adeqo-c
+	.adeqo-container .navbar.navbar-default.navbar-fixed-top.scrolled{
+
+		-webkit-box-shadow: 0 8px 6px -6px rgba(199,199,199,0);
+		-moz-box-shadow: 0 8px 6px -6px rgba(199,199,199,0);
+		-o-box-shadow: 0 8px 6px -6px rgba(199,199,199,0);
+		-ms-box-shadow: 0 8px 6px -6px rgba(199,199,199,0);
+		box-shadow: 0 8px 6px -6px rgba(199,199,199,0);
+	}
+	.adeqo-container .navbar-default .navbar-nav>.active>a{border-top: transparent solid 2px;}
+	.adeqo-container.page-contact-us .banner,
+	.adeqo-container.page-login .banner,
+	.adeqo-container.page-personal-demo .banner {
+		height: 600px;
+	}
+	.adeqo-container .navbar-nav{
+		margin: 0;
+	}
+	.adeqo-container.page-login .login-box-top-container{
+		margin:0 auto;
+		padding-top:0;
+	}
+	.adeqo-container .navbar-brand>img {
+		max-width: 80%;
+	}
+	.adeqo-container .navbar-default .navbar-collapse{
+		background-color: #fff;
+		top: 0;
+		right: 0;
+		z-index: 999;
+		width:100%;
+		float: right;
+		padding:0;
+		-webkit-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+		-moz-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+		-o-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+		-ms-box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+		box-shadow: 0 8px 6px -6px rgba(199,199,199,0.33);
+	}
+	.adeqo-container.page-contact-us h1{
+		padding-top: 30%;
+	}
+	.adeqo-container .navbar-default .navbar-collapse, .navbar-default .navbar-form{
+		border: none;
+	}
+	.adeqo-container .navbar-toggle{
+		padding:38px;
+	}
+	.adeqo-container .nav>li{
+		padding:16px 0;
+	}
+	.adeqo-container .footer-container p{text-align: center}
+	.adeqo-container.page-contact-us .banner,
+	.adeqo-container.page-login .banner {
+		background-position-x: 1%;
+	}
+	.adeqo-container .login-heading{
+		font-size: 12px;
+	}
+	.adeqo-container.page-login .login-box-top-container {
+		color:#000;
+	}
+	.adeqo-container .btn{
+		min-width: 140px;
+	}
+	.adeqo-container.page-login .scrolled.navbar-default .collapse.in .navbar-nav>.active>a,
+	.adeqo-container.page-login .scrolled.navbar-default .collapse.in .navbar-nav>*>a,
+	.adeqo-container.page-login .navbar-default .navbar-nav>.active>a,
+	.adeqo-container.page-login .navbar-default .navbar-nav>*>a{
+		color: #000;
+	}
+	.adeqo-container .nav.navbar-nav.navbar-right {
+		padding: 30px 45px;
+	}
+}
+
+@media (max-width:480px) {
+	.adeqo-container.page-contact-us .banner,
+	.adeqo-container.page-login .banner,
+	.adeqo-container.page-personal-demo .banner {
+		height: 300px;
+	}
+	.adeqo-container.page-contact-us h1 {
+		padding-top: 35%;
+	}
+	.adeqo-container.page-login .login-box-top-container{
+		margin:0 auto;
+	}
+	.adeqo-container.page-contact-us .banner, .adeqo-container.page-login .banner {
+		background-position-x: 10%;
+	}
+	.adeqo-container.page-login .login-box-top-container h2{
+		font-size: 36px;
+		padding-top:200px;
+	}
+}
+
+@media (max-width: 480px){
+	.adeqo-container.page-contact-us h1, .adeqo-container.page-personal-demo h1 {
+	    padding-top: 140px;
+	    font-size: 40px;
+	}
+}
+/*/responsive*/

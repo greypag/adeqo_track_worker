@@ -1,0 +1,488 @@
+<%= render partial: "campaign_tab_menu.html.erb" %>
+
+<%
+ # @username 
+ # @password
+ # @api_token
+%>
+
+
+<div class="content_outer content-no-padding">
+	<div class="content_core tab_content">
+		<form action="" method="post" id="campaignKeywordFilterForm" autocomplete="off">
+				
+			<input type="hidden" id="campaign_type" name="campaign_type" value="<%=@type.to_s%>"/>
+			<input type="hidden" id="campaign_id" name="campaign_id" value="<%=@id.to_i%>"/>
+			<input type="hidden" id="network_id" name="network_id" value="<%=@network_id.to_s%>"/>
+			<input type="hidden" id="adgroup_id" name="adgroup_id" value="<%=@adgroup_id.to_s%>"/>
+			
+			<ul class="nav nav-pills filters-nav">
+				<!-- <li class="dropdown" id="custom-view-dropdown">
+					<a data-toggle="modal" data-target="#add-keyword-modal" role="button">
+						<img src="/images/icon/add-black.png" alt="Add Keywords" title="Add Keywords">
+						Add Keywords
+					</a>
+				</li> -->
+	
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="submitExportData();">
+						<img src="/images/icon/export.png" alt="Export" title="Export">
+						Export
+					</a>
+				</li>
+	
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/edit-black.png" alt="Edit" title="Edit">
+						Edit <span class="caret"></span>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:;" onclick="editStatus('active');">Enable</a></li>
+							<li><a href="javascript:;" onclick="editStatus('inactive');">Pause</a></li>
+							<!-- <li><a href="javascript:;" onclick="editStatus('remove');">Remove</a></li> -->
+							<li role="separator" class="divider"></li>
+							<li><a href="javascript:;" onclick="showChangeCpcContentOuter();">Change CPC Bid</a></li>
+							<li><a href="javascript:;" onclick="showFindReplaceContentOuter();">Find & Replace</a></li>
+							<!-- <li><a href="javascript:;" onclick="showUploadContentOuter();">Upload Spreadsheet</a></li> -->
+						</ul>
+					</a>
+				</li>
+	
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" onclick="showRulesContentOuter();">
+						<img src="/images/icon/adv-filter.png" alt="Advanced Filter" title="Advanced Filter">
+						Advanced Filter <span class="caret"></span>
+					</a>
+					<!-- <ul class="dropdown-menu advanced-filter-dropdown">
+						<li><a href="javascript:;" onclick="showRulesContentOuter();applyFilter(this);">Create filter</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a class="no-highlight" href="javascript:;"><i class="info-text">Apply saved filter</i></a></li>
+						<li><a href="javascript:;">filter 1<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+						<li><a href="javascript:;">filter 2<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+						<li><a href="javascript:;">filter 3<span class="remove_icon pull-right" onclick="applyFilter(this);"></span></a></li>
+					</ul> -->
+				</li>
+	
+				<li class="dropdown">
+					<a href="/clickactivity/campaign/<%=@id%>">
+						<img src="/images/icon/click-icon.png" alt="Click Activity" title="Click Activity">
+						Click Activity
+					</a>
+				</li>
+	
+				<!-- <li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/sync.png" alt="Sync" title="Sync">
+						Sync
+					</a>
+				</li> -->
+	
+	
+				<li class="pull-right">
+					<a onclick="$('#date-range-dropdown .dropdown-toggle').dropdown('toggle');" href="javascript:;">
+						<span class="caret"></span>
+						<img src="/images/icon/calendar.png" alt="Calendar" title="Calendar">
+					</a>
+				</li>
+				<li id="date-range-dropdown" class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<div class="text-right date-range">
+						</div>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="text-center" onclick="setDate('Yesterday');applyFilter(this);"><a href="javascript:;">Yesterday</a></li>
+						<li class="text-center" onclick="setDate('Last 7 days');applyFilter(this);"><a href="javascript:;">Last 7 days</a></li>
+						<li class="text-center" onclick="setDate('Last 30 days');applyFilter(this);"><a href="javascript:;">Last 30 days</a></li>
+						<li class="text-center" onclick="setDate('This Week');applyFilter(this);"><a href="javascript:;">This Week</a></li>
+						<li class="text-center" onclick="setDate('Last Week');applyFilter(this);"><a href="javascript:;">Last Week</a></li>
+						<li class="text-center" onclick="setDate('This Month');applyFilter(this);"><a href="javascript:;">This Month</a></li>
+						<li class="text-center" onclick="setDate('Last Month');applyFilter(this);"><a href="javascript:;">Last Month</a></li>
+						<li class="text-center" onclick="setDate('Last 3 Months');applyFilter(this);"><a href="javascript:;">Last 3 Months</a></li>
+						<li class="text-center"><a class="no-highlight">Select Dates:</a></li>
+						<li class="text-center">
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="start_date" name="start_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+							to
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="end_date" name="end_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+						</li>
+						<li class="text-center">
+							<a class="no-highlight" href="javascript:;">
+								<button type="button" class="btn btn-red btn-xs btn-fullwidth" onclick="applyFilter(this, true);">Apply</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
+			</ul>
+		</form>
+	</div>
+</div>
+ 
+<div id="rules-content-outer" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form">
+			<form action="" method="post" id="filterForm" autocomplete="off">
+				<div id="rules-content">
+					<div class="form_row filter_row">
+						<div class="pull-left">
+							<select name="field_name" class="form_field" onchange="selectRuleField(this);">
+								<option value="status">Status</option>
+								<option value="adgroup_name">Ad Group Name</option>
+								<option value="final_url">Landing page URL</option>
+								<option value="m_final_url">Mobile Landing page URL</option>
+								<!-- <option value="ad_type">Ad Type</option> -->
+								<option value="max_cpc">Max. CPC</option>
+								
+								<option value="impr">Impr.</option>
+								<option value="clicks">Clicks</option>
+								<option value="ctr">CTR</option>
+								<option value="cost">Cost</option>
+								<option value="avg_cpc">Avg. CPC</option>
+								
+								<option value="conv">Conversions</option>
+								<option value="conv_rate">Conv. Rate</option>
+								<option value="cpa">CPA</option>
+								<option value="cpm">CPM</option>
+								<option value="revenue">Revenue</option>
+								<option value="profit">Profit</option>
+								<option value="avg_pos">Avg. Pos.</option>
+								<option value="rpa">RPA</option>
+								<option value="roas">ROAS</option>
+								<option value="link">link</option>
+							</select>
+						</div>
+	
+						<div class="field_container pull-left">
+							<input type="hidden" name="field_rule" class="form_field" value="="/>
+							
+							<select name="field_value" class="form_field">
+								<option value="Active">Active</option>
+								<option value="Inactive">Inactive</option>
+							</select>
+						</div>
+						<span class="remove_icon" onclick="removeRule(this)"></span>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="form_row">
+					Add rules<span class="add_icon" onclick="addRule()"></span>
+				</div>
+
+				<hr>
+				<div class="form_row">
+					<button type="button" class="button red_button submit_button" onclick="getCampaignData();">Apply</button>
+					<button type="button" class="button white_button cancel_button" onclick="resetRule();">Reset</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideRulesContentOuter();">Close</button>
+					<!-- <div class="form-group pull-right">
+						<label><input type="checkbox"> Save filter</label>
+						<input type="text" class="form_field" placeholder="Enter filter name">
+					</div> -->
+				</div>
+			</form>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div style="display: none;">
+	<form action="" method="post" id="editStatusForm" autocomplete="off">
+		<input type="hidden" name="campaign_type" value="<%=@type.to_s%>"/>
+		<input type="hidden" name="campaign_id" value="<%=@id.to_i%>"/>
+		<input type="hidden" name="network_id" value="<%=@network_id%>"/>
+		
+		<div id="edit_hidden_checkbox" class="hidden"></div>
+		<input type="text" name="status"/>
+	</form>
+</div>
+
+<div id="cpc-content-outer" class="content_outer extend_content">
+	<div class="content_core row">
+		<div class="content_form col-md-9">
+			<form action="" method="post" id="editCpcBidForm" autocomplete="off">
+				<input type="hidden" name="campaign_type" value="<%=@type.to_s%>"/>
+				<input type="hidden" name="campaign_id" value="<%=@id.to_i%>"/>
+				<input type="hidden" name="network_id" value="<%=@network_id%>"/>
+				<div id="cpcbid_hidden_checkbox" class="hidden"></div>
+				
+				<div class="form_row"><strong><span id="cpcbid_selected_number"></span> keywords, selected</strong></div>
+				<div class="form_row">Change CPC bids</div>
+				<div class="form_row">
+					<div class="pull-left">
+						Action 
+						<select name="action_type" class="form_field" onchange="changeCpcBidInput(this.value);">
+							<option value="set">Set max CPC bid to</option>
+							<option value="increase">Increase max CPC bid by</option>
+							<option value="decrease">Decrease max CPC bid by</option>
+						</select>
+					</div>
+					<div class="pull-left">
+						<div id="cpcbid_input_container"></div>
+						<span id="edit_cpcbid_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="form_row">
+					<button type="button" class="button red_button submit_button" onclick="submitEditCpcBid();">Make Changes</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideCpcContentOuter();">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="find-replace-content-outer" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form col-md-9">
+			<form action="" method="post" id="editFindReplaceForm" autocomplete="off">
+				<input type="hidden" name="campaign_type" value="<%=@type.to_s%>"/>
+				<input type="hidden" name="campaign_id" value="<%=@id.to_i%>"/>
+				<input type="hidden" name="network_id" value="<%=@network_id%>"/>
+				<div id="findreplace_hidden_checkbox" class="hidden"></div>
+				
+				<div class="form_row"><strong><span id="findreplace_selected_number"></span> keywords selected</strong></div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						Edit:
+					</div>
+					<div class="content_form_input pull-left">
+						<select name="field_name" class="form_field">
+							<option value="final_url">Landing Page URL</option>
+							<option value="mobile_final_url">Mobile Landing Page URL</option>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						Find:
+					</div>
+					<div class="content_form_input pull-left">
+						<input id="edit_find" name="field_find" type="text" autocomplete="off" class="form_field"/><br/>
+				 		<span id="edit_find_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<div class="content_form_label pull-left">
+						Replace with:
+					</div>
+					<div class="content_form_input pull-left">
+						<input id="edit_replace" name="field_replace" type="text" autocomplete="off" class="form_field"/><br/>
+				 		<span id="edit_replace_error" class="error_message"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form_row">
+					<button type="button" class="button red_button submit_button" onclick="submitEditFindReplace();">Make Changes</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideFindReplaceContentOuter();">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="upload-content-outer" class="content_outer extend_content" style="display: none;">
+	<div class="content_core row">
+		<div class="content_form">
+			<form action="/bulkaddkeyword" method="post" id="uploadForm" enctype="multipart/form-data" autocomplete="off" target="hiddenUploadIframe">
+				<input type="hidden" id="campaign_type" name="campaign_type" value="<%=@type.to_s%>"/>
+				<input type="hidden" id="campaign_id" name="campaign_id" value="<%=@id.to_i%>"/>
+				<input type="hidden" id="network_id" name="network_id" value="<%=@network_id%>"/>
+				<div class="form_row">
+					<strong>Upload spreadsheets edits</strong>
+				</div>
+				<div class="form_row">
+					Upload a spreadsheets to make changes to your campaign (.xlsx format)
+				</div>
+				<div class="form_row upload-row">
+					<input type="hidden" name="type" />
+					<input type="file" name="file"/>
+					<span id="upload_error" class="error_message"></span>
+				</div>
+				<div class="form_row">&nbsp;</div>
+				<div class="form_row">
+					<button type="button" class="button white_button submit_button" onclick="submitUpload('apply');">Upload & Apply</button>
+					<button type="button" class="button white_button cancel_button" onclick="hideUploadContentOuter();">Cancel</button>
+				</div>
+				<div class="form_row">
+					Download a template <a href="/csv_template/Keyword_Upload_Template.xlsx">here</a>
+				</div>
+			</form>
+			
+			<iframe id="hiddenUploadIframe" name="hiddenUploadIframe" height="0" width="0" frameborder="0" scrolling="yes"></iframe>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<table id="keywords-table" class="table table-condensed">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th class="text-left">
+				<div class="checkbox">
+					<label>
+						<input id="select_all" type="checkbox" onchange="selectAll(this);"> Status
+					</label>
+				</div>
+			</th>
+			<th>Ad Group Name</th>
+			<th>Keyword</th>
+			<th>Match Type</th>
+			<th>Landing page URL</th>
+			<th>Mobile landing page URL</th>
+			<th>Max. CPC</th>
+			
+			<th>Impr.</th>
+			<th>Clicks</th>
+			<th>CTR</th>
+			<th>Cost</th>
+			<th>Avg. CPC</th>
+			<th>Conversions</th>
+			<th>Conv. Rate</th>
+			<th>CPA</th>
+			<th>CPM</th>
+			<th>Revenue</th>
+			<th>Profit</th>
+			<th>Avg. Pos</th>
+			<th>RPA</th>
+			<th>ROAS</th>
+			<th>Destination URL</th>
+			<th>Mobile Destination URL</th>	
+		</tr>
+	</thead>
+	<tbody class="text-right">
+		
+	</tbody>
+	
+	<tfoot>
+        <tr>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-left" style="padding-left:44px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+            <th class="text-right" style="padding-right:18px;"></th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="add-keyword-modal" tabindex="-1" role="dialog" aria-labelledby="add-keyword-modal_label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal_container">
+					<div class="modal_title">Create new keyword</div>
+					<hr/>
+					<form action="" method="post" id="addUserForm" autocomplete="off">
+						<input type="hidden" name="signup_company_id" id="signup_company_id" value="<%=@company_id%>">
+
+						<!-- name field -->
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form_row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<label for="add_name" class="form_label pull-right">Ad Group:</label>
+								<div class="clearfix"></div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<select>
+									<option value="super">Company Admin</option>
+								  	<option value="write">User</option>
+								  	<option value="read">Read OnlyUser</option>
+								</select>
+								<br/>
+						 		<span id="add_access_level_error" class="error_message"></span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<!-- email field -->
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form_row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<label for="add_email" class="form_label pull-right">Keyword Type:</label>
+								<div class="clearfix"></div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<select>
+									<option value="super">Company Admin</option>
+								  	<option value="write">User</option>
+								  	<option value="read">Read OnlyUser</option>
+								</select>
+								<br/>
+						 		<span id="add_access_level_error" class="error_message"></span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<!-- password field -->
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form_row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<label for="add_password" class="form_label pull-right">Match Type:</label>
+								<div class="clearfix"></div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<select>
+									<option value="super">Company Admin</option>
+								  	<option value="write">User</option>
+								  	<option value="read">Read OnlyUser</option>
+								</select>
+								<br/>
+						 		<span id="add_access_level_error" class="error_message"></span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<!-- access level field -->
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form_row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<label for="add_access_level" class="form_label pull-right">Keywords:</label>
+								<div class="clearfix"></div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pad-h-5">
+								<textarea row="4" id="add-keywords"></textarea>
+								<span id="add-keywords-error" class="error_message"></span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</form>
+					<hr/>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="button red_button submit_button pull-right" data-toggle="modal" data-target="#add-keyword-modal">Submit</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="button white_button cancel_button pull-left" data-toggle="modal" data-target="#add-keyword-modal">Cancel</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

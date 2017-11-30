@@ -1,0 +1,39 @@
+/* Printed report css */
+body.print {
+  padding: inherit !important;
+  -webkit-print-color-adjust: exact;
+}
+body.print table .bg-light-gray {
+  background: #f2f2f2;
+}
+body.print table .bg-gray {
+  background: #bdbdbd;
+}
+body.print table .bg-red {
+  background: #bc2132;
+  color: #ffffff;
+}
+body.print table .bg-pink {
+  background: #e2beca;
+}
+body.print table .bold {
+  font-weight: bold;
+}
+body.print table img.ad-copy {
+  height: 50px;
+}
+body.print [id^='bar-chart-'] {
+  width: 100%;
+  max-width: 450px;
+}
+body.print .pie-charts-container .pie-chart-container {
+  text-align: center;
+}
+@media print {
+  @page {
+    size: A4 landscape;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+}

@@ -1,0 +1,98 @@
+<div class="content_title">Account Settings</div>
+<%= render partial: "account_tab_menu.html.erb" %>
+
+<%
+@company_id = @user_company_id
+
+if @user_company_id.to_i < 4
+	@company_id = @company_id + 1
+end
+
+script = <<EOL
+<script type="text/javascript">
+var _dynm = _dynm || [];
+(function() {
+    function a(a) {
+        return null != a ? a.toString().substring(0, 1024) : ""
+    }
+    var gl = {'tag_version':'ut0.1','companyid': #{@company_id}}; 
+    var prm = {};
+    prm.params1 = '';
+    prm.params2 = '';
+    prm.params3 = '';
+    prm.params4 = '';
+    prm.params5 = '';
+    prm.params6 = '';
+    prm.params7 = '';
+    prm.params8 = '';
+    prm.params9 = '';
+    prm.params10 = '';
+    
+    gl.prm = prm;
+    _dynm.push(gl);
+    for (var b = [], c = 0; c < _dynm.length; c++){
+        if (_dynm[c].hasOwnProperty("tag_version") && _dynm[c].hasOwnProperty("companyid") && _dynm[c].hasOwnProperty("prm")){
+            b.push("rn=" + (Math.floor((1e8 - 2) * Math.random()) + 1));
+            for (var d in _dynm[c]){
+                if (_dynm[c].hasOwnProperty(d)){
+                    if ("object" == typeof _dynm[c][d]){
+                        for (var e in _dynm[c][d]) 
+                            _dynm[c][d].hasOwnProperty(e) && b.push("prm." + e + "=" + _dynm[c][d][e]);
+                    }else{
+                        b.push(d + "=" + _dynm[c][d]);
+                    }
+                }
+            }
+            _dynm[c].p = 1;
+            var f = document.createElement("script");
+            f.type = "text/javascript"; 
+            f.async = !0; 
+            f.charset = "UTF-8"; 
+            f.src = "https://t.adeqo.com/event?" + b.join("&");
+            var a = document.getElementsByTagName("script")[0];
+            a.parentNode.insertBefore(f, a)
+        }
+    }
+
+})();
+</script>
+EOL
+ 
+ 
+ 
+ 
+noscript = <<EOL 
+
+			<noscript>
+				<img style="border-style:none;" alt="" src="https://t.adeqo.com/event?tag_version=ut0.1&companyid=#{@user_company_id}&prm.params1=&prm.params2=&prm.params3=&prm.params4=&prm.params5=&prm.params6=&prm.params7=&prm.params8=&prm.params9=&prm.params10=" width="1" height="1">
+			</noscript>
+
+EOL
+
+%>
+
+<div class="content_outer">
+	<div class="content_core">
+		<div class="content_core_big_title">
+			Pixel Code
+		</div>
+		<hr/>
+		<div class="content_core_title">
+			Copy the code below and paste it between the &lt;head&gt; and &lt;/head&gt; in your website code.
+		</div>
+		<div class="tracking_code_container">
+			<div class="tracking_code_core" id="toBeCopied" contenteditable="true">
+				<%=script.to_s%>				
+				
+				<br /><br /><br />
+				
+				<%=noscript.to_s%>
+				
+			</div>
+			<hr/>
+			<div class="tracking_code_button_container">
+				<div class="button red_button submit_button central_button" onclick="autoSelect('toBeCopied');">Copy Scripts</div>
+			</div>
+		</div>
+	</div>
+</div>

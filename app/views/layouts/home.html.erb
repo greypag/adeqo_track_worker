@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+	<% current_uri = request.env['PATH_INFO'] %>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Adeqo</title>
+		<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+		
+		<!-- <link href="/css/bootstrap.css" rel="stylesheet"> -->
+		 
+		
+		<link href="<%= asset_path('jquery-ui-1.11.4/jquery-ui.min.css') %>" rel="stylesheet">
+		<link href="<%= asset_path('jquery-ui-1.11.4/jquery-ui.structure.min.css') %>" rel="stylesheet">
+		
+		<link href="<%= asset_path('bootstrap-datepicker-1.4.0-dist/css/bootstrap-datepicker3.min.css') %>" rel="stylesheet">
+		<link href="<%= asset_path('DataTables-1.10.7/media/css/jquery.dataTables.min.css') %>" rel="stylesheet">
+		<link href="<%= asset_path('chosen_v1.4.2/chosen.min.css') %>" rel="stylesheet">
+		<link href="<%= asset_path('jquery-ui-1.11.4/jquery-ui.min.css') %>" rel="stylesheet">
+		
+		<!-- <link href="/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet"> -->
+		<!-- <link href="/jquery-ui-1.11.4/jquery-ui.structure.min.css" rel="stylesheet"> -->
+		<!-- <link href="/css/bootstrap.css" rel="stylesheet"> -->
+		<!-- <link href="/bootstrap-datepicker-1.4.0-dist/css/bootstrap-datepicker3.min.css" rel="stylesheet"> -->
+		<!-- <link href="/DataTables-1.10.7/media/css/jquery.dataTables.min.css" rel="stylesheet"> -->
+		<!-- <link href="/chosen_v1.4.2/chosen.min.css" rel="stylesheet"> -->
+		<link href="/selectize.js-master/dist/css/selectize.css" rel="stylesheet">
+		<link href="/font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet">
+		<!-- <link href="/css/main.css" rel="stylesheet"> -->
+		
+		<%= stylesheet_link_tag    'css/bootstrap.css'%>
+		<%= stylesheet_link_tag    'css/main.css'%>
+		
+		<%= javascript_include_tag 'js/jquery.min.js' %>
+		
+		<!-- <script type="text/javascript" src="/js/jquery.min.js"></script> -->
+		<% stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<% javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+		
+		<% if current_uri.to_s == "/bulkupload/add" || current_uri.to_s == "/bulkupload/edit"%>
+			<script>
+				console.log(window.location);
+				$( window ).load(function() {
+					if(window.location.protocol == "https:"){
+						n_url = "http://"+window.location.host+""+window.location.pathname
+						window.location.replace(n_url);
+					}
+				});
+			</script>
+		<% else %>
+			
+			<script>
+			/*
+				console.log(window.location);
+				$( window ).load(function() {
+					if(window.location.protocol == "http:"){
+						n_url = "https://"+window.location.host+""+window.location.pathname
+						window.location.replace(n_url);
+					}
+				});
+			*/
+			</script>
+			
+		<% end %>
+		
+	</head>
+	
+	
+	<body class="logged-in">
+		<nav class="navbar navbar-default navbar-fixed-top header_container">
+			<div class="container-fluid">
+				<div class="pull-left">
+					<div class="pull-left"><a href="/"><img class="responsive_image_center" src="/images/adeqo-white.png" alt="Adeqo" title="Adeqo"/></a></div>
+					<div class="pull-left header_nav account_nav"><a href=""><img src="/images/icon/message.png" alt="Account Status" title="Account Status"/> Account Status</a></div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="pull-right">
+					<div class="pull-left header_nav search_nav">
+						<div class="search_container">
+							<input id="keyword" name="keyword" type="text" onkeyup="navSearch();"/><img src="/images/icon/search.png"/>
+						</div>
+						<div id="search_sub_navbar" class="sub_navbar search_sub_navbar">
+							<div class="result_cat">
+								<div class="result_cat_title">Accounts<span class="result_count">(6)</span></div>
+								<hr/>
+								<div class="result">BMG - Brand</div>
+								<div class="result">BMG - Asia</div>
+								<div class="result">BMG - Pacific</div>
+								<div class="result">More &lt;</div>
+							</div>
+							<div class="result_cat">
+								<div class="result_cat_title">Campaigns<span class="result_count">(1)</span></div>
+								<hr/>
+								<div class="result">BMG - Brand sogou</div>
+							</div>
+							<div class="result_cat">
+								<div class="result_cat_title">Keywords<span class="result_count">(3)</span></div>
+								<hr/>
+								<div class="result">BMG</div>
+								<div class="result">BMG ad</div>
+								<div class="result">BMG Asia</div>
+								<div class="result">More &lt;</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="pull-left divide_nav"></div>
+					<div class="pull-left header_nav create_campaign_nav">
+						<a href="javascript:;" onclick="toggleSubMenu('create_campaign');">Create Campaign <img src="/images/icon/add-camp.png" alt="Create Campaign" title="Create Campaign"/></a>
+						<div class="sub_navbar create_campaign_sub_navbar">
+							<form id="resetForm" action="" method="post" autocomplete="off">
+								<div class="sub_nav">Select the network you would like to create a new campaign on.</div>
+								<hr/>
+								<div class="sub_nav"><input type="checkbox" name="ads_type" value="360"/> Add 360 Ads</div>
+								<div class="sub_nav"><input type="checkbox" name="ads_type" value="Sogou"/> Add Sogou Ads</div>
+								<div class="sub_nav">
+									<div class="create_button button">Create Now</div>
+									<div class="cancel_button button">Cancel</div>
+									<div class="clearfix"></div>
+								</div>
+							</form>
+						</div>
+					</div> -->
+					<div class="pull-left divide_nav"></div>
+					<div class="pull-left header_nav support_nav">
+						<a href="javascript:;" onclick="toggleSubMenu('support');">Support <img src="/images/icon/support.png" alt="Support" title="Support"/></a>
+						<div class="sub_navbar support_sub_navbar">
+							<div class="sub_nav"><a href=""><img src="/images/icon/mail.png" alt="Contact Us" title="Contact Us"/> Contact Us</a></div>
+							<hr/>
+							<div class="sub_nav"><a href=""></a><img src="/images/icon/question.png" alt="FAQs" title="FAQs"/> FAQs</a></div>
+						</div>
+					</div>
+					<div class="pull-left divide_nav"></div>
+					<div class="pull-left header_nav user_nav">
+						<a href="javascript:;" onclick="toggleSubMenu('user');"><%=@user_name.to_s%> <img src="/images/icon/menu.png" alt="User" title="User"/></a>
+						<div class="sub_navbar user_sub_navbar">
+							
+							<% if @user_role.to_s.downcase != "read" %>
+								<div class="sub_nav"><a href="/account"><img src="/images/icon/setting.png" alt="Account Setting" title="Account Setting"/> Account Setting</a></div>
+								<hr/>
+								<div class="sub_nav"><a href="/account/portfolio"><img src="/images/icon/portfolio.png" alt="Portfolio" title="Portfolio"/> Portfolio</a></div>
+								<hr/>
+							<% end %>
+								<div class="sub_nav"><a href="/logout"><img src="/images/icon/logout.png" alt="Logout" title="Logout"/> Logout</a></div>
+								
+						</div>
+					</div>
+					<div class="pull-left divide_nav"></div>
+					<div class="pull-left header_nav lang_nav">
+						<a href="javascript:;" onclick="toggleSubMenu('lang');">中文</a>
+						<div class="sub_navbar lang_sub_navbar">
+							<div class="sub_nav">Coming Soon</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</nav>
+		
+		<div class="main_container">
+			<div class="sidebar">
+				<div class="side_nav dashboard_side_nav active">
+					<a href="/dashboard"><img src="/images/icon/dash.png" alt="Dashboard" title="Dashboard"/> Dashboard</a>
+					<div class="active_point"></div>
+				</div>
+				<%
+				
+				@user_network_array = []
+				
+				@user_network = @db[:network_user].find('user' => session[:user_id].to_i)
+				@db.close
+				
+				@user_network.each do |user_network|
+            		@user_network_array << user_network["network_id"]
+	        	end
+	          
+				@total_network_type = []
+				
+				@network = @db[:network].find('id' => { "$in" => @user_network_array})
+				@db.close
+				
+				@network.each do |usernetwork|
+					@total_network_type << usernetwork["type"] 
+				end
+				
+				@total_network_type = @total_network_type.uniq
+				%>
+				 
+				<div class="side_nav network_side_nav">
+					<a href="javascript:;" onclick="toggleHiddenSideMenu('network');"><img src="/images/icon/network-left.png" alt="Networks" title="Networks"/> Networks</a>
+					<div class="active_point"></div>
+					<% if @total_network_type.count.to_i > 0 %>
+						<div class="hidden_value"><%=@total_network_type.count.to_i%></div>
+					<% end %>
+				</div>
+				
+				<% if @total_network_type.count.to_i > 0 %>
+					<div class="hidden_content network_hidden_content">
+						<% @total_network_type.each do |network_type|%>
+								<% 
+								type = network_type
+								
+								if network_type.to_s == "360"
+									type = "threesixty"
+								end
+								%>
+								
+								<% title = network_type.slice(0,1).capitalize + network_type.slice(1..-1) %>
+								
+								<div class="side_nav hidden_side_nav">
+									<a href="/campaigns/<%=type%>"><img src="/images/icon/network_<%=title.downcase%>.png" alt="<%=title%>" title="<%=title%>"/></a>
+									<div class="active_point"></div>
+								</div>
+						<% end %>
+					</div>
+				<% end %>
+				
+				<div class="side_nav account_side_nav">
+					<a href="/channel/accounts"><img src="/images/icon/account.png" alt="Accounts" title="Accounts"/> Accounts</a>
+					<% if @user_network_array.count.to_i > 0 %>
+						<div class="hidden_value"><%=@user_network_array.count.to_i.to_s%></div>
+					<% end %>
+				</div>
+				 
+				<div class="side_nav campaign_side_nav">
+					<!-- <a href="javascript:;" onclick="toggleHiddenSideMenu('campaign');"><img src="/images/icon/campaign.png" alt="Campaigns" title="Campaigns"/> Campaigns</a> -->
+					<a href="/campaigns"><img src="/images/icon/campaign.png" alt="Campaigns" title="Campaigns"/> Campaigns</a>
+					<div class="active_point"></div>
+					<%
+					
+					if @user_network_array.count.to_i > 0
+						
+						@all_campaign = @db["all_campaign"].find('network_id' => { "$in" => @user_network_array},'network_type' => { "$in" => @total_network_type})
+      					@db.close
+      					
+						@total_campaign = @all_campaign.count.to_i
+						
+						# @total_network_array.each do |doc|
+							# #need to add more later, joe
+							# db_name = "campaign_sogou_"+doc['id'].to_s
+							# @sogou_campaign = @db[db_name].find()
+							# # @sogou_campaign = @db[:campaign_sogou].find('network_id' => doc["id"].to_i)
+							# @db.close
+							# @total_campaign = @total_campaign + @sogou_campaign.count.to_i
+# 							
+							# db_name = "campaign_360_"+doc['id'].to_s
+							# @campaign_360 = @db[db_name].find()
+							# # @campaign_360 = @db[:campaign_360].find('network_id' => doc["id"].to_i)
+							# @db.close
+							# @total_campaign = @total_campaign + @campaign_360.count.to_i
+						# end
+					end
+					%>
+					
+					<% %>
+					
+					<% if @total_campaign.to_i > 0 %>
+						<div class="hidden_value"><%=@total_campaign%></div>
+					<% end %>
+					
+				</div>
+				
+				
+				<%
+				
+				# if session[:user_id].to_i == 5 
+					# concat "sad"
+					# concat @sogou_campaign.count.to_i
+					# concat "sad2"
+					# concat @campaign_360.count.to_i
+				# end
+				%>
+				<!-- <div class="hidden_content campaign_hidden_content">
+					<div class="side_nav hidden_side_nav">
+						<a href=""><img src="/images/icon/campaign.png" alt="Campaigns" title="Campaigns"/> Campaigns</a>
+						<div class="active_point"></div>
+					</div>
+				</div> -->
+				<!-- <div class="side_nav rule_side_nav">
+					<a href=""><img src="/images/icon/rules.png" alt="Automated Rules" title="Automated Rules"/> Automated Rules</a>
+					<div class="active_point"></div>
+				</div>
+				<div class="side_nav report_side_nav">
+					<a href=""><img src="/images/icon/report.png" alt="Report Center" title="Report Center"/> Report Center</a>
+					<div class="active_point"></div>
+				</div> -->
+				<div class="side_nav search_side_nav">
+					<a href="/advancedsearch"><img src="/images/icon/adv-search.png" alt="Advanced Search" title="Advanced Search"/> Advanced Search</a>
+					<div class="active_point"></div>
+				</div>
+				
+				<div class="side_nav search_side_nav">
+					<a href="/bulkupload/add"><img src="/images/icon/bulk.png" alt="Bulk Upload" title="Bulk Upload"/> Bulk Upload</a>
+					<div class="active_point"></div>
+				</div>
+				
+				<div class="sidebar_toggle_button button" onclick="toggleSidebar();"></div>
+			</div>
+			<div class="body">
+				<%= yield %>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		
+		<nav class="navbar navbar-default navbar-fixed-bottom footer_container">
+			<div class="container-fluid">
+				<div class="copyright_container pull-left">
+					<%
+					@current_year = @now.to_date.strftime("%Y")
+					%>
+					Copyright © <%=@current_year%> Adeqo. <a href="http://www.bmgww.com" target="_blank">Intellectual Property of BMG</a>. All Rights Reserved. | <a href="https://www.sgs.gov.cn/notice/query/queryEntInfoMain.do?uuid=nfc_corvFBxOhzSllYN8rIdnf6tXa6h6" target="_blank">上海工商</a> | 沪ICP备15044856号
+				</div>
+				<div class="policy_container pull-right">
+					Terms of use & Privacy Policy
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</nav>
+		
+		<div class="loading_container">
+			<div class="loading_background"></div>
+			<div class="loading_image"></div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="export-modal" tabindex="-1" role="dialog" aria-labelledby="export_modal_label">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="modal_container">
+							<div class="modal_title">File is preparing to download. This will only take a few moments. Check your Downloads folder.</div>
+							<hr/>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+									<div class="button red_button cancel_button pull-left" onclick="$('#export-modal').modal('hide');">OK</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="edit_error_modal" tabindex="-1" role="dialog" aria-labelledby="edit_error_modal_label">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="modal_container">
+							<div class="modal_title">No records selected</div>
+							<hr/>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+									<div class="button red_button cancel_button pull-left" onclick="$('#edit_error_modal').modal('hide');">OK</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+		var session_start_date;
+		var session_end_date;
+		
+		var bulk_session_start_date;
+		var bulk_session_end_date;
+		
+		var adv_session_start_date;
+		var adv_session_end_date;
+		
+		// start_date=new Date(d.getFullYear(), d.getMonth(), d.getDate());
+		// end_date=new Date(d.getFullYear(), d.getMonth(), d.getDate());
+		
+		var page_option = [30, 50, 100, 200];
+		
+		<%
+		if !session[:length].nil?
+			%>
+			
+			page_option = jQuery.grep(page_option, function( n, i ) {
+			  return ( n !== <%=session[:length]%> );
+			});
+			
+			page_option.unshift(<%=session[:length]%>);
+			<%
+		end
+			
+		request_end_date = session[:end_date]
+        @end_date = request_end_date.to_date.strftime("%Y-%m-%d")
+        @end_year = request_end_date.to_date.strftime("%Y")
+        @end_month = request_end_date.to_date.strftime("%m")
+        @end_day = request_end_date.to_date.strftime("%d")
+        
+        request_start_date = session[:start_date]
+        @start_date = request_start_date.to_date.strftime("%Y-%m-%d")
+        @start_year = request_start_date.to_date.strftime("%Y")
+        @start_month = request_start_date.to_date.strftime("%m")
+        @start_day = request_start_date.to_date.strftime("%d")
+        
+        
+        bulk_request_end_date = session[:bulk_end_date]
+        @bulk_end_date = bulk_request_end_date.to_date.strftime("%Y-%m-%d")
+        @bulk_end_year = bulk_request_end_date.to_date.strftime("%Y")
+        @bulk_end_month = bulk_request_end_date.to_date.strftime("%m")
+        @bulk_end_day = bulk_request_end_date.to_date.strftime("%d")
+        
+        bulk_request_start_date = session[:bulk_start_date]
+        @bulk_start_date = bulk_request_start_date.to_date.strftime("%Y-%m-%d")
+        @bulk_start_year = bulk_request_start_date.to_date.strftime("%Y")
+        @bulk_start_month = bulk_request_start_date.to_date.strftime("%m")
+        @bulk_start_day = bulk_request_start_date.to_date.strftime("%d")
+        
+        
+        
+        adv_request_end_date = session[:adv_end_date]
+        @adv_end_date = adv_request_end_date.to_date.strftime("%Y-%m-%d")
+        @adv_end_year = adv_request_end_date.to_date.strftime("%Y")
+        @adv_end_month = adv_request_end_date.to_date.strftime("%m")
+        @adv_end_day = adv_request_end_date.to_date.strftime("%d")
+        
+        adv_request_start_date = session[:adv_start_date]
+        @adv_start_date = adv_request_start_date.to_date.strftime("%Y-%m-%d")
+        @adv_start_year = adv_request_start_date.to_date.strftime("%Y")
+        @adv_start_month = adv_request_start_date.to_date.strftime("%m")
+        @adv_start_day = adv_request_start_date.to_date.strftime("%d")
+        
+        
+		%>
+		
+		
+		
+		session_start_date=new Date(<%=@start_year%>, <%=@start_month%>-1, <%=@start_day%>);
+		session_end_date=new Date(<%=@end_year%>, <%=@end_month%>-1, <%=@end_day%>);
+		
+		bulk_session_start_date=new Date(<%=@bulk_start_year%>, <%=@bulk_start_month%>-1, <%=@bulk_start_day%>);
+		bulk_session_end_date=new Date(<%=@bulk_end_year%>, <%=@bulk_end_month%>-1, <%=@bulk_end_day%>);
+		
+		adv_session_start_date=new Date(<%=@adv_start_year%>, <%=@adv_start_month%>-1, <%=@adv_start_day%>);
+		adv_session_end_date=new Date(<%=@adv_end_year%>, <%=@adv_end_month%>-1, <%=@adv_end_day%>);
+		
+		
+		</script>
+		
+		<!-- <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script> -->
+		
+		<script type="text/javascript" src="<%= asset_path('jquery-ui-1.11.4/jquery-ui.min.js') %>"></script>
+		<script type="text/javascript" src="<%= asset_path('bootstrap-datepicker-1.4.0-dist/js/bootstrap-datepicker.min.js') %>"></script>
+		<script type="text/javascript" src="<%= asset_path('Chart.js-master/Chart.min.js') %>"></script>
+		<script type="text/javascript" src="<%= asset_path('DataTables-1.10.7/media/js/jquery.dataTables.min.js') %>"></script>
+		<script type="text/javascript" src="<%= asset_path('chosen_v1.4.2/chosen.jquery.min.js') %>"></script>
+		
+		<%= javascript_include_tag 'js/jquery.fileDownload.js' %>
+		<%= javascript_include_tag 'js/bootstrap.min.js' %>
+		<%= javascript_include_tag 'js/home.js' %>
+		<%= javascript_include_tag 'js/accounting.min.js' %>
+		<%= javascript_include_tag 'js/jquery.ellipsis.js' %>
+		
+		<!-- <script type="text/javascript" src="/jquery-ui-1.11.4/jquery-ui.min.js"></script> -->
+		<!-- <script type="text/javascript" src="/js/jquery.fileDownload.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script> -->
+		<!-- <script type="text/javascript" src="/bootstrap-datepicker-1.4.0-dist/js/bootstrap-datepicker.min.js"></script> -->
+		<!-- <script type="text/javascript" src="/Chart.js-master/Chart.min.js"></script> -->
+		<!-- <script type="text/javascript" src="/DataTables-1.10.7/media/js/jquery.dataTables.min.js"></script> -->
+		<script type="text/javascript" src="/selectize.js-master/dist/js/standalone/selectize.min.js"></script>
+		<!-- <script type="text/javascript" src="/chosen_v1.4.2/chosen.jquery.min.js"></script> -->
+		<!-- <script type="text/javascript" src="/js/home.js"></script>
+		<script type="text/javascript" src="/js/accounting.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.ellipsis.js"></script> -->
+		
+		
+		<% if current_uri.to_s == "/dashboard"%>
+				<!-- <script type="text/javascript" src="/js/dashboard.js"></script>
+				<script type="text/javascript" src="/js/dashboard-overview.js"></script> -->
+				
+				<%= javascript_include_tag 'js/dashboard.js' %>
+				<%= javascript_include_tag 'js/dashboard-overview.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s == "/dashboard/detail"%>
+				<!-- <script type="text/javascript" src="/js/dashboard.js"></script>
+				<script type="text/javascript" src="/js/dashboard-details.js"></script> -->
+				
+				<%= javascript_include_tag 'js/dashboard.js' %>
+				<%= javascript_include_tag 'js/dashboard-details.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s == "/channel/accounts" %>
+				<%= javascript_include_tag 'js/network.js' %>
+				<%= javascript_include_tag 'js/network-networks.js' %>			
+		<% end %>
+		
+		
+		<% if current_uri.to_s.include?("/channel") && current_uri.to_s.include?("/campaigns") %>
+				<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-campaigns.js' %>			
+		<% end %>
+		
+		<% if current_uri.to_s == "/campaigns" || current_uri.to_s == "/campaigns/sogou" || current_uri.to_s == "/campaigns/threesixty" %>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-campaigns.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-campaigns.js' %>
+			
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/campaigns") && current_uri.to_s.include?("/overview")%>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-overview.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-overview.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/setting") %>
+			<%= javascript_include_tag 'js/campaign.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/campaigns") && current_uri.to_s.include?("/adgroup")%>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-adgroup.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-adgroup.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/campaigns") && current_uri.to_s.include?("/ads")%>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-ads.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-ads.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/campaigns") && current_uri.to_s.include?("/keyword")%>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-keyword.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-keyword.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/clickactivity") %>
+			<!-- <script type="text/javascript" src="/js/campaign.js"></script>
+			<script type="text/javascript" src="/js/campaign-clickactivity.js"></script> -->
+			
+			<%= javascript_include_tag 'js/campaign.js' %>
+			<%= javascript_include_tag 'js/campaign-clickactivity.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s ==  "/advancedsearch" %>
+			<%= javascript_include_tag 'js/advancesearch.js' %>
+		<% end %>
+		
+		<% if current_uri.to_s == "/advancedsearchistory" then %>
+		
+			<%= javascript_include_tag 'js/advancedsearchistory.js' %>
+			<%= javascript_include_tag 'js/advancedsearchistory-advancedsearchistory.js' %>		
+				
+		<% end %>
+		
+		<% if current_uri.to_s.include?("/bulk/summary") %>
+			
+			<%= javascript_include_tag 'js/bulkjob.js' %>
+			<%= javascript_include_tag 'js/bulkjob-bulkjobs.js' %>
+			
+		<% end %>
+		
+		
+		
+	</body>
+</html>

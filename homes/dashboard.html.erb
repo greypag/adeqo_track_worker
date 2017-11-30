@@ -1,0 +1,294 @@
+<div class="content_title">Dashboard</div>
+
+<ul class="tab_menu">
+	<li><a class="tab_tag overview_tag active">Overview</a></li>
+	<li><a class="tab_tag details_tag" href="/dashboard/detail">Details</a></li>
+</ul>
+
+<div class="content_outer content-no-padding">
+	<div class="content_core tab_content">
+		<form action="" method="post" id="dashboardFilterForm" autocomplete="off">
+			<ul class="nav nav-pills filters-nav">
+	
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/network.png" alt="Networks" title="Networks"> Network Filter <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;">
+							<label for="qihoo_360" class="normal-font-weight">
+								<input type="checkbox" id="qihoo_360" name="channel_array[]" value="360" checked> Qihoo 360
+							</label>
+						</a></li>
+						<!-- <li><a href="javascript:;">
+							<label for="baidu" class="normal-font-weight">
+								<input type="checkbox" id="baidu" name="channel_array" value="checked"> Baidu
+							</label>
+						</a></li>
+						<li><a href="javascript:;">
+							<label for="shenma" class="normal-font-weight">
+								<input type="checkbox" id="shenma" name="channel_array" value="checked"> Shenma
+							</label>
+						</a></li> -->
+						<li><a href="javascript:;">
+							<label for="sogou" class="normal-font-weight">
+								<input type="checkbox" id="sogou" name="channel_array[]" value="sogou" checked> Sogou
+							</label>
+						</a></li>
+						<li>
+							<a class="no-highlight">
+								<button type="button" class="btn btn-red btn-xs btn-halfwidth" onclick="applyFilter(this, true);">Apply</button>
+								<button type="button" class="btn btn-white btn-xs btn-halfwidth" onclick="applyFilter(this, false);">Cancel</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<li class="dropdown" id="custom-view-dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<img src="/images/icon/account.png" alt="Account Filter" title="Account Filter">
+						Account Filter <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+
+						<%
+						
+						@user_network_id_array = []
+				      	@user_network = @db[:network_user].find('user' => session[:user_id].to_i)
+				      
+				      	@user_network.each do |user_network|
+				        	@user_network_id_array << user_network["network_id"]
+				      	end
+				      	
+				      	@current_user_network = @db[:network].find('id' => { "$in" => @user_network_id_array})
+						%>
+						
+						<%
+						all_checkbox_checked = false
+						if @current_user_network.count.to_i > 0
+				        	@current_user_network.each do |network|
+		            		%>
+		            		<li>
+		            			<a href="javascript:;">
+								<label for="<%=network["type"].to_s%>_<%=network["name"].to_s%>" class="normal-font-weight">
+									<input type="checkbox" class="account_id" id="<%=network["type"].to_s%>_<%=network["id"].to_i%>" name="account_array[]" value="<%=network["id"].to_i%>" > <%=network["name"].to_s%>
+								</label>
+								</a>
+							</li>
+		            		<%
+				            end
+				        end	
+						%>
+						
+						<li>
+							<a class="no-highlight">
+								<label for="all" class="normal-font-weight">
+									<% if all_checkbox_checked %>
+										<input type="checkbox" id="all" checked onchange="selectAllFilterAccountOption(this);"> All
+									<% else %>
+										<input type="checkbox" id="all" onchange="selectAllFilterAccountOption(this);">
+									<% end %>
+								</label>
+								<button type="button" class="btn btn-red btn-xs" onclick="applyFilter(this, true);">Apply</button>
+								<button type="button" class="btn btn-white btn-xs" onclick="applyFilter(this, false);">Cancel</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+	
+				<li class="pull-right">
+					<a onclick="$('#date-range-dropdown .dropdown-toggle').dropdown('toggle');" href="javascript:;">
+						<span class="caret"></span>
+						<img src="/images/icon/calendar.png" alt="Networks" title="Networks">
+					</a>
+				</li>
+				<li id="date-range-dropdown" class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button">
+						<div class="text-right date-range">
+						</div>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="text-center" onclick="setDate('Yesterday');applyFilter(this);"><a href="javascript:;">Yesterday</a></li>
+						<li class="text-center" onclick="setDate('Last 7 days');applyFilter(this);"><a href="javascript:;">Last 7 days</a></li>
+						<li class="text-center" onclick="setDate('Last 30 days');applyFilter(this);"><a href="javascript:;">Last 30 days</a></li>
+						<li class="text-center" onclick="setDate('This Week');applyFilter(this);"><a href="javascript:;">This Week</a></li>
+						<li class="text-center" onclick="setDate('Last Week');applyFilter(this);"><a href="javascript:;">Last Week</a></li>
+						<li class="text-center" onclick="setDate('This Month');applyFilter(this);"><a href="javascript:;">This Month</a></li>
+						<li class="text-center" onclick="setDate('Last Month');applyFilter(this);"><a href="javascript:;">Last Month</a></li>
+						<li class="text-center" onclick="setDate('Last 3 Months');applyFilter(this);"><a href="javascript:;">Last 3 Months</a></li>
+						<li class="text-center"><a class="no-highlight">Select Dates:</a></li>
+						<li class="text-center">
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="start_date" name="start_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+							to
+							<a class="no-highlight">
+								<div class="datepicker-container">
+									<input type="text" id="end_date" name="end_date" class="datepicker-field">
+									<span class="caret input-caret"></span>
+								</div>
+							</a>
+						</li>
+						<li class="text-center">
+							<a class="no-highlight">
+								<button type="button" class="btn btn-red btn-xs btn-fullwidth" onclick="applyFilter(this, true);">Apply</button>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+
+<table id="performance-statistics-table" class="table table-condensed">
+	<thead>
+		<tr>
+			<th>
+				Performance Statistics<i class="fa fa-question-circle budget_tooltips" data-toggle="tooltip" data-placement="top" data-="" title="Performance data is updated every 24 hours"></i>
+				<span class="pull-right"></span>
+			</th>
+		</tr>
+	</thead>
+</table>
+
+<div class="line-chart-container">
+	<div class="line-chart-legend-container">
+		<span class="line-chart-legend line-chart-legend-1"></span>
+		<span class="line-chart-dropdown-container">
+			<select id="line-chart-dropdown-1" class="chosen-select" onchange="genLineChart(this.value, $('#line-chart-dropdown-2').val());">
+				<option value="">None</option>
+				<option value="impressions" selected>Impr.</option>
+				<option value="clicks">Clicks</option>
+				<option value="ctr">CTR</option>
+				<option value="cost">Cost</option>
+				<option value="avg_cpc">Avg. CPC</option>
+				<option value="conversion">Conversions</option>
+				<option value="conversion_rate">Conv. Rate</option>
+				<option value="cpa">CPA</option>
+				<option value="revenue">Revenue</option>
+				<option value="profit">Profit</option>
+				<option value="avg_pos">Avg. Pos.</option>
+			</select>
+		</span>
+
+		<span class="line-chart-legend line-chart-legend-2"></span>
+		<span class="line-chart-dropdown-container">
+			<select id="line-chart-dropdown-2" class="chosen-select" onchange="genLineChart($('#line-chart-dropdown-1').val(), this.value);">
+				<option value="">None</option>
+				<option value="impressions">Impr.</option>
+				<option value="clicks" selected>Clicks</option>
+				<option value="ctr">CTR</option>
+				<option value="cost">Cost</option>
+				<option value="avg_cpc">Avg. CPC</option>
+				<option value="conversion">Conversions</option>
+				<option value="conversion_rate">Conv. Rate</option>
+				<option value="cpa">CPA</option>
+				<option value="revenue">Revenue</option>
+				<option value="profit">Profit</option>
+				<option value="avg_pos">Avg. Pos.</option>
+			</select>
+		</span>
+	</div>
+
+	<canvas id="line-chart"></canvas>
+</div>
+
+<div class="div-halfwidth div-halfwidth-left">
+	<div class="table-responsive">
+	<table id="summary-table" class="table table-condensed">
+		<thead>
+			<tr>
+				<th colspan="4">
+					Performance Summary by Network
+					<span class="pull-right"></span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	</div>
+</div>
+
+<div class="div-halfwidth div-halfwidth-right">
+	<div class="donut_chart_table">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>
+						Spend by Network
+					</th>
+				</tr>
+			</thead>
+		</table>
+		<div class="donut_chart_container text-center">
+			<div class="chart-title">
+				<span></span>
+			</div>
+			<div class="chart-center-text">
+				<span>Total Spend</span>
+				<h3></h3>
+			</div>
+			<div class="chart_margin">
+				<canvas id="spend_donut_chart" class="donut_chart"></canvas>
+			</div>
+			<div class="row chart-legend"></div>
+			
+			<div id="spend_donut_chart_indicator"></div>
+		</div>
+	</div>
+	
+	<div class="donut_chart_table">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>
+						Conversions by Network
+					</th>
+				</tr>
+			</thead>
+		</table>
+		<div class="donut_chart_container text-center">
+			<div class="chart-title">
+				<span></span>
+			</div>
+			<div class="chart-center-text">
+				<span>Total Conversions</span>
+				<h3></h3>
+			</div>
+			<div class="chart_margin">
+				<canvas id="conversion_donut_chart" class="donut_chart"></canvas>
+			</div>
+			<div class="row chart-legend"></div>
+			
+			<div id="conversion_donut_chart_indicator"></div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<table id="performance-vs-budget-table" class="table table-condensed">
+	<thead>
+		<tr>
+			<th colspan="8">
+				Budget Report<i class="fa fa-question-circle budget_tooltips" data-toggle="tooltip" data-placement="top" data-="" title="Budget Tracker report helps you stay on top of your spending. To show up-to-date and meaningful information, update the Monthly Budget field in the account settings"></i>
+				<span class="pull-right"></span>
+				<div class="pull-right">
+					<div class="color_indicator_container pull-left"><div class="color_indicator below-budget pull-left"></div>Under</div>
+					<div class="color_indicator_container pull-left"><div class="color_indicator on-budget pull-left"></div>On</div>
+					<div class="color_indicator_container pull-left"><div class="color_indicator over-budget pull-left"></div>Over</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>

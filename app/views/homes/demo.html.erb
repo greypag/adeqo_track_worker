@@ -1,0 +1,171 @@
+<div class="adeqo-container page-personal-demo">
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
+      <div class="container ">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand"><img src="/images/adeqo-logo.png" alt="Adeqo" title="Adeqo" width="132" height="76" class="img-responsive"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact_us">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="banner">
+    <h1>Personal Demo</h1>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="personal_information_form col-sm-8 col-sm-push-2 col-sm-12 head-title">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 head-title">
+          	<div class="text-center" id="msg">
+          	</div>
+            <div class="text-center">To learn how to take your PR and social media marketing programs to the next level with Adeqo, fill out the form below and one of our consultants will get in touch right away to schedule a demo</div>
+          </div>
+          <div class="content_form">
+            <form id="personal_form" method="post" class="form">
+              <div class="personal_demo_form_row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_first_name" name="personal_demo_first_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="First Name*"/>
+                  </div>
+                </div>
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_last_name" name="personal_demo_last_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="Last Name*"/>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="personal_demo_form_row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_company_name" name="personal_demo_company_name" type="text" value="" class="form_field form-control personal_form_text" placeholder="Company Name"/>
+                  </div>
+                </div>
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_business_email" name="personal_demo_business_email" type="text" value="" class="form_field form-control personal_form_text" placeholder="Business Email*"/>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="personal_demo_form_row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_phone_number" name="personal_demo_phone_number" type="text" value="" class="form_field form-control personal_form_text" placeholder="Phone Number"/>
+                  </div>
+                </div>
+                <div class="personal_form_input col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <input id="personal_demo_country" name="personal_demo_country" type="text" value="" class="form_field form-control personal_form_text" placeholder="Country"/>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="personal_demo_form_row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="personal_form_input col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <textarea id="personal_demo_help" name="personal_demo_help" cols="40" rows="10" aria-invalid="false" class="form-control personal_form_text" placeholder="How can we help you?"></textarea>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 horizontal-center bottom-btn">
+                    <button type="button" id="submit_button" onclick="" form="personal_form" class="button red_button submit_button">Get a Demo</button>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <p>Copyright © 2016 Adeqo. <a href="http://www.bmgww.com" target="_blank">Intellectual Property of BMG</a>. All Rights Reserved.</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-right">Terms of use & Privacy Policy</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<script type="text/javascript">
+
+$("#submit_button").click(function(e){
+	var postData = $("#personal_form" ).serializeArray();
+	var formURL = "/send_demo_email";
+	
+	$( "#msg" ).hide();
+	$( "#msg" ).empty();
+	$("#personal_form :input").prop("disabled", true);
+	
+	// console.log(postData);
+	
+	for (i = 0; i < postData.length; i++) {
+		
+		// console.log(postData[i]["name"]);
+		// console.log(postData[i]["value"]);
+		
+		if(postData[i]["name"] == "personal_demo_first_name" || postData[i]["name"] == "personal_demo_last_name" || postData[i]["name"] == "personal_demo_business_email"){
+			if(postData[i]["value"] == ""){
+				$( "#msg" ).append( "<p style='color:red;'>Please fill in the required field.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+				return;
+			}
+		}
+		
+		if(postData[i]["name"] == "personal_demo_business_email"){
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(regex.test(postData[i]["value"]) == false){
+				$( "#msg" ).append( "<p style='color:red;'>Please make sure your email is in correct format.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+				return;		
+			}
+		}
+		
+	}
+	
+	$.ajax({
+		url : formURL,
+		type: "POST",
+		data : postData,
+		success:function(data, textStatus, jqXHR) 
+		{
+			if(data['status'] == "true"){
+				$( "#msg" ).append( "<p style='color:green;'>Thanks for your email, we will reply to you shortly!</p>" );
+				$( "#msg" ).show();
+				$( "#personal_form" )[0].reset();
+				$("#personal_form :input").prop("disabled", false);
+				
+				$( "#msg" ).delay(2500).slideUp(850);
+			}else{
+				$( "#msg" ).append( "<p style='color:red;'>Something wrong with your data, please make sure you type in the correct format.</p>" );
+				$( "#msg" ).show();
+				$("#personal_form :input").prop("disabled", false);
+			}
+		
+		},
+		error: function(jqXHR, textStatus, errorThrown) 
+		{
+			$( "#msg" ).append( "<p style='color:red;'>Our service is too busy, please try again in a few minutes.</p>" );
+			$( "#msg" ).show();
+			$("#personal_form :input").prop("disabled", false);
+		}
+	});
+	
+    e.preventDefault();
+});
+// $("#personal_form").submit();
+</script>

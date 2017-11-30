@@ -1,0 +1,193 @@
+<div class="adeqo-container page-contact-us">
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
+      <div class="container ">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand"><img src="/images/adeqo-logo.png" alt="Adeqo" title="Adeqo" width="132" height="76" class="img-responsive"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/contact_us">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="banner">
+    <h1>Contact Us</h1>
+  </section>
+  <section class="content">
+    <div class="container">
+      <div class="">
+        <div class="col-xs-12 col-md-5 contact-us-left-col">
+          <div id="msg"></div>
+		  <form id="contact_us_form" method="post" class="form">
+            <p>Call us at +852 2492 2770 or use below form to get in touch with us</p>
+            <div class="contact_form_row">
+              <div class="contact_form_input">
+                <div class="form-group">
+                  <input id="contact_name" name="contact_name" type="text" value="" class="form-control personal_form_text" placeholder="Name*"/>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="contact_form_row">
+              <div class="contact_form_input">
+                <div class="form-group">
+                  <input id="contact_email" name="contact_email" type="text" value="" class="form-control personal_form_text" placeholder="Email*"/>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="contact_form_row">
+              <div class="contact_form_input">
+                <div class="form-group">
+                  <input id="contact_subject" name="contact_subject" type="text" value="" class="form-control personal_form_text" placeholder="Subject*"/>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="contact_form_row">
+              <div class="contact_form_input">
+                <div class="form-group">
+                  <textarea id="contact_message" name="contact_message" cols="40" rows="10" aria-invalid="false" class="form-control contact_form_text" placeholder="Message*"></textarea>
+                </div><br/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 horizontal-center">
+                  <button type="button" id="submit_button" form="contact_us_form" class="button red_button submit_button">Send Your Message</button>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </form>
+        </div>
+        <div class="hidden-xs col-md-2"></div>
+        <div class="col-xs-12 col-md-5">
+          <div class="block-container">
+            <h2><span class="contact_form_title">Visit Us:</span></h2>
+            <p>Global Headquarters</p>
+            <p>19/F, Tung Chiu Commercial Centre,<br/>193-197 Lockhart Road Wanchai, Hong Kong<br/>Tel: +852 2492 2770<br/>Email: <a href="mailto:sales@bmgww.com">sales@bmgww.com</a></p>
+            <div>
+              <button class="btn btn-default black-border" type="button" data-toggle="collapse" data-target="#collapseMap" aria-expanded="true" aria-controls="collapseMap">Get Direction</button>
+              <div class="collapse in" id="collapseMap">
+                <div style="height:400px; width: 100%;"> 
+                  <div id="map"></div>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <div class="block-container">
+            <h2><span class="contact_form_title">Join Us:</span></h2>
+            <p>We're constantly looking for outstanding<br/>beings to join our team.</p>
+            <p>Email us to find our more.</p>
+            <a href="mailto:sales@bmgww.com" class="btn btn-default black-border">Join Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <p>Copyright © 2016 Adeqo. <a href="http://www.bmgww.com" target="_blank">Intellectual Property of BMG</a>. All Rights Reserved.</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-right">Terms of use & Privacy Policy</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script type="text/javascript">
+
+
+$("#submit_button").click(function(e){
+	console.log("submit_button");
+	
+	var postData = $("#contact_us_form").serializeArray();
+	var formURL = "/send_contact_us_email";
+	
+	$( "#msg" ).hide();
+	$( "#msg" ).empty();
+	$("#contact_us_form :input").prop("disabled", true);
+	
+	
+	for (i = 0; i < postData.length; i++) {
+		
+		if(postData[i]["value"] == ""){
+			$( "#msg" ).append( "<p style='color:red;'>Please fill in the required field.</p>" );
+			$( "#msg" ).show();
+			$("#contact_us_form :input").prop("disabled", false);
+			return;
+		}
+		
+		if(postData[i]["name"] == "contact_email"){
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(regex.test(postData[i]["value"]) == false){
+				$( "#msg" ).append( "<p style='color:red;'>Please make sure your email is in correct format.</p>" );
+				$( "#msg" ).show();
+				$("#contact_us_form :input").prop("disabled", false);
+				return;		
+			}
+		}
+	}
+	
+	
+	$.ajax({
+		url : formURL,
+		type: "POST",
+		data : postData,
+		success:function(data, textStatus, jqXHR) 
+		{
+			if(data['status'] == "true"){
+				$( "#msg" ).append( "<p style='color:green;'>Thanks for your email, we will reply to you shortly!</p>" );
+				$( "#msg" ).show();
+				$( "#contact_us_form" )[0].reset();
+				$("#contact_us_form :input").prop("disabled", false);
+				
+				$( "#msg" ).delay(2500).slideUp(850);
+			}else{
+				$( "#msg" ).append( "<p style='color:red;'>Something wrong with your data, please make sure you type in the correct format.</p>" );
+				$( "#msg" ).show();
+				$("#contact_us_form :input").prop("disabled", false);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) 
+		{
+			$( "#msg" ).append( "<p style='color:red;'>Our service is too busy, please try again in a few minutes.</p>" );
+			$( "#msg" ).show();
+			$("#contact_us_form :input").prop("disabled", false);
+		}
+	});
+    e.preventDefault();
+});
+</script>
+
+<script>
+var map;
+function initMap() {
+  var myLatLng = {lat: 22.278503, lng: 114.1722743};
+
+  // Create a map object and specify the DOM element for display.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: myLatLng,
+    scrollwheel: false,
+    zoom: 17
+  });
+
+  // Create a marker and set its position.
+  var marker = new google.maps.Marker({
+    map: map,
+    position: myLatLng,
+    title: '19/F, Tung Chiu Commercial Centre, 193-197 Lockhart Road, Wanchai, Hong Kong'
+  });
+}
+</script>
+<script async defer src="http://maps.google.cn/maps/api/js?key=&signed_in=false&amp;libraries=places&amp;language=en&amp;callback=initMap"></script>
+
+
+
+
+
